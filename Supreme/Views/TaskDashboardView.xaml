@@ -37,7 +37,8 @@
             <ListBox ItemsSource="{Binding TasksList}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      BorderBrush="#999" 
-                     ItemsPanel="{StaticResource listPanelTemplate}">
+                     ItemsPanel="{StaticResource listPanelTemplate}"
+                     Margin="10">
             </ListBox>
         </StackPanel>
     </Grid>

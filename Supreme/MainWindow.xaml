@@ -21,7 +21,7 @@
             </DataTemplate>
             <DataTemplate
                 DataType="{x:Type VMs:TaskDashboardViewModel}">
-                <Vs:TaskListView />
+                <Vs:TaskDashboardView />
             </DataTemplate>
             <DataTemplate
                 DataType="{x:Type VMs:ComingSoonViewModel}">

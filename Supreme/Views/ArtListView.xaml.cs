@@ -1,9 +1,4 @@
-﻿using AngleSharp;
-using Supreme.Model;
-using Supreme.ViewModel;
-using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 
 namespace Supreme.Views
 {
