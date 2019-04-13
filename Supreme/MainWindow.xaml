@@ -4,9 +4,87 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Supreme"
+        xmlns:Vs="clr-namespace:Supreme.Views"
+        xmlns:VMs="clr-namespace:Supreme.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="" Height="450" Width="800" FontFamily="Courier New">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <DataTemplate
+                DataType="{x:Type VMs:ArtListViewModel}">
+                <Vs:ArtListView />
+            </DataTemplate>
+            <DataTemplate
+                DataType="{x:Type VMs:ProfileSettingsViewModel}">
+                <Vs:ProfileSettingsView />
+            </DataTemplate>
+            <DataTemplate
+                DataType="{x:Type VMs:TaskDashboardViewModel}">
+                <Vs:TaskListView />
+            </DataTemplate>
+            <DataTemplate
+                DataType="{x:Type VMs:ComingSoonViewModel}">
+                <Vs:ComingSoonView />
+            </DataTemplate>
+        </ResourceDictionary>
+    </Window.Resources>
+
+        <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition
+                Width="0.2*"
+                MinWidth="150" />
+            <ColumnDefinition
+                Width="0.8*"
+                MinWidth="150" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition
+                    Height="1"
+                    MinHeight="32"/>
+                <RowDefinition
+                    Height="1"
+                    MinHeight="32"/>
+            </Grid.RowDefinitions>
+        </Grid>
+            
+        <Grid Grid.Column="0">
+            <Grid.Background>
+                <ImageBrush ImageSource="https://d17ol771963kd3.cloudfront.net/assets/bg/4-7b9b4f69751409d8e2ac8842ad103f9f.gif" Stretch="UniformToFill"/>
+            </Grid.Background>
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <Button Content="tasks" 
+                        Style="{StaticResource MainListButtonStyle}"
+                        Command="{Binding ViewDashboardCommand}"
+                        />
+                <Button Content="drops" 
+                        Style="{StaticResource MainListButtonStyle}"
+                        Command="{Binding ViewComingSoonCommand}"
+                        />
+                <Button Content="shop" 
+                        Style="{StaticResource MainListButtonStyle}"
+                        Command="{Binding ViewArtsCommand}"
+                        />
+                <Button Content="orders" 
+                        Style="{StaticResource MainListButtonStyle}"
+                        Command="{Binding ViewComingSoonCommand}"
+                        />
+                <Button Content="profiles" 
+                        Style="{StaticResource MainListButtonStyle}"
+                        Command="{Binding ViewProfileSettingsCommand}"
+                        />
+                <Button Content="settings" 
+                        Style="{StaticResource MainListButtonStyle}"
+                        Command="{Binding ViewComingSoonCommand}"
+                        />
+            </StackPanel>
+        </Grid>
+
+        <ContentControl 
+            Grid.Column="1" 
+            Content="{Binding Path=Current}"
+            />
     </Grid>
 </Window>

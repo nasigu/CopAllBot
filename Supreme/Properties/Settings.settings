@@ -1,7 +1,48 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Supreme.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="FullName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NIKITA ATRASHKEVICH</Value>
+    </Setting>
+    <Setting Name="Email" Type="System.String" Scope="User">
+      <Value Profile="(Default)">nkatrvld@gmail.com</Value>
+    </Setting>
+    <Setting Name="Tel" Type="System.String" Scope="User">
+      <Value Profile="(Default)">+79267081190</Value>
+    </Setting>
+    <Setting Name="Address" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Pokrishkina 9 246</Value>
+    </Setting>
+    <Setting Name="Address2" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="Address3" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="City" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Moscow</Value>
+    </Setting>
+    <Setting Name="PostCode" Type="System.String" Scope="User">
+      <Value Profile="(Default)">119602</Value>
+    </Setting>
+    <Setting Name="Country" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RUSSIA</Value>
+    </Setting>
+    <Setting Name="CardType" Type="System.String" Scope="User">
+      <Value Profile="(Default)">VISA</Value>
+    </Setting>
+    <Setting Name="CardNumber" Type="System.String" Scope="User">
+      <Value Profile="(Default)">4206380025368447</Value>
+    </Setting>
+    <Setting Name="CardExpityMonth" Type="System.String" Scope="User">
+      <Value Profile="(Default)">04</Value>
+    </Setting>
+    <Setting Name="CardExpirtYear" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2024</Value>
+    </Setting>
+    <Setting Name="CardCVV" Type="System.String" Scope="User">
+      <Value Profile="(Default)">132</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

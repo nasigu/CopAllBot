@@ -1,22 +1,18 @@
 ﻿using AngleSharp;
-using HtmlAgilityPack;
-using System.Linq;
-using System.Windows;
-using System.Threading.Tasks;
-using System.Windows.Controls;
-using System.Windows.Data;
 using Supreme.Model;
+using Supreme.ViewModel;
 using System.Collections.ObjectModel;
-using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Controls;
 
-namespace Supreme
+namespace Supreme.Views
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ArtListView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ArtListView : UserControl
     {
-        public MainWindow()
+        public ArtListView()
         {
             InitializeComponent();
         }
@@ -40,5 +36,6 @@ namespace Supreme
         //        ArtItem.SoldOutVisibility = Visibility.Hidden;
         //    }
         //}
+
     }
 }

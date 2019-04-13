@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="Supreme.Views.TaskDashboardView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Supreme.Views"
+      xmlns:data ="clr-namespace:Supreme.Model"
+      xmlns:vml = "clr-namespace:Supreme.Core"
+      vml:ViewModelLocator.AutoHookedUpViewModel = "True"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type data:TaskDashboard}">
+            <Grid>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding Profile}"/>
+                    <Label Content="{Binding Store}"/>
+                    <Label Content="{Binding Product}"/>
+                    <Label Content="{Binding Size}"/>
+                    <Label Content="{Binding Log}"/>
+                    <Label Content="{Binding Action}"/>
+                </StackPanel>
+                <!--<Image Source="{Binding Path=Image}" Width="81" Height="81" Panel.ZIndex="0"/>
+                <TextBlock Name="SoldOutBlock" Style="{StaticResource ResourceKey=SoltOutTagStyle}">
+                    sold<LineBreak/>out
+                </TextBlock>-->
+            </Grid>
+        </DataTemplate>
+
+        <ItemsPanelTemplate x:Key="listPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <ListBox ItemsSource="{Binding TasksList}"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     BorderBrush="#999" 
+                     ItemsPanel="{StaticResource listPanelTemplate}">
+            </ListBox>
+        </StackPanel>
+    </Grid>
+</UserControl>
