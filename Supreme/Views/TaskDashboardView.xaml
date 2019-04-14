@@ -13,7 +13,7 @@
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type data:TaskDashboard}">
             <Grid>
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Margin="10">
                     <Label Content="{Binding Profile}"/>
                     <Label Content="{Binding Store}"/>
                     <Label Content="{Binding Product}"/>
@@ -25,21 +25,25 @@
                 <TextBlock Name="SoldOutBlock" Style="{StaticResource ResourceKey=SoltOutTagStyle}">
                     sold<LineBreak/>out
                 </TextBlock>-->
+
             </Grid>
         </DataTemplate>
 
         <ItemsPanelTemplate x:Key="listPanelTemplate">
-            <WrapPanel />
+            <StackPanel Orientation="Vertical"/>
+            
         </ItemsPanelTemplate>
     </UserControl.Resources>
     <Grid>
-        <StackPanel Orientation="Vertical">
             <ListBox ItemsSource="{Binding TasksList}"
                      ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                      BorderBrush="#999" 
                      ItemsPanel="{StaticResource listPanelTemplate}"
-                     Margin="10">
+                     Margin="10"
+                     BorderThickness="3"
+                     >
             </ListBox>
-        </StackPanel>
+        
+
     </Grid>
 </UserControl>

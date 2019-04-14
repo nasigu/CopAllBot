@@ -13,25 +13,36 @@ namespace Supreme.ViewModel
     public class ArtListViewModel : BaseListViewModel<Art>
     {
 
+        #region Constructor
 
         public ArtListViewModel()
         {
-            LoadArtListAsync();
+            LoadArtList();
         }
 
-       
+        #endregion Constructor
+
+        #region Property
+
         private static readonly string Extension = "https";
         private static readonly string Site = "www.supremenewyork.com";
         private static readonly string ShopAllAddress = $"{Extension}://{Site}/shop/all";
 
         public ObservableCollection<ArtList> ArtsList { get; set; }
-        public NotifyTaskCompletion<IDocument> HtmlDocument { get; private set; }
+        //public NotifyTaskCompletion<IDocument> HtmlDocument { get; private set; }
+
+        #endregion Property
+
+        #region Command
+        private ICommand _DoSomethingCommand;
+        public ICommand DoSomethingCommand { get { return _DoSomethingCommand ?? (_DoSomethingCommand = new ActCommand(DoSomething)); } }
+        #endregion Command
 
         #region Method
-      
 
-        public void LoadArtListAsync()
+        public void LoadArtList()
         {
+            
             string Source = DownloadHtml(ShopAllAddress);
             var Items = new ObservableCollection<ArtList>();
             var config = Configuration.Default.WithDefaultLoader();
@@ -56,18 +67,12 @@ namespace Supreme.ViewModel
             ArtsList = Items;
         }
 
-        private ICommand _DoSomethingCommand;
-        public ICommand DoSomethingCommand
-        {
-            get { return _DoSomethingCommand ?? (_DoSomethingCommand = new ActCommand(DoSomething)); }
-
-
-        }
-
         private void DoSomething()
         {
             Trace.WriteLine("FSDFS");
         }
+
+        #endregion Method
 
         //private void Grid_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         //{
@@ -89,9 +94,6 @@ namespace Supreme.ViewModel
         //    }
         //}
 
-        #endregion Method
 
     }
-
-
 }

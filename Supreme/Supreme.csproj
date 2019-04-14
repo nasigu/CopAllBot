@@ -89,19 +89,37 @@
     <Compile Include="Model\ComingSoon.cs" />
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TaskDashboard.cs" />
+    <Compile Include="Model\Test.cs" />
+    <Compile Include="ViewModel\CreateTask\CreateTaskFinalizeViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\CreateTaskSpecificationsViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\CreateTaskTypeViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\CreateTaskViewModel.cs" />
     <Compile Include="ViewModel\ProfileSettingsViewModel.cs" />
     <Compile Include="ViewModel\ArtListViewModel.cs" />
-    <Compile Include="ViewModel\BaseItemViewModel.cs" />
-    <Compile Include="ViewModel\BaseListViewModel.cs" />
-    <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel\BaseItemViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel\BaseListViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ComingSoonViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\PageViewModel.cs" />
     <Compile Include="ViewModel\TaskDashboardViewModel.cs" />
     <Compile Include="ViewModel\TaskListViewModel.cs" />
+    <Compile Include="ViewModel\TestViewModel.cs" />
     <Compile Include="ViewModel\User.cs" />
     <Compile Include="Views\ComingSoonView.xaml.cs">
       <DependentUpon>ComingSoonView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\CreateTaskFinalizeView.xaml.cs">
+      <DependentUpon>CreateTaskFinalizeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\CreateTaskSpecificationsView.xaml.cs">
+      <DependentUpon>CreateTaskSpecificationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\CreateTaskTypeView.xaml.cs">
+      <DependentUpon>CreateTaskTypeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\CreateTaskView.xaml.cs">
+      <DependentUpon>CreateTaskView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileSettingsView.xaml.cs">
       <DependentUpon>ProfileSettingsView.xaml</DependentUpon>
@@ -117,6 +135,9 @@
     </Compile>
     <Compile Include="Views\TaskListView.xaml.cs">
       <DependentUpon>TaskListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TestView.xaml.cs">
+      <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -159,6 +180,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\CreateTask\CreateTaskFinalizeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\CreateTaskSpecificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\CreateTaskTypeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\CreateTaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ProfileSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +213,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\TaskListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\TestView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

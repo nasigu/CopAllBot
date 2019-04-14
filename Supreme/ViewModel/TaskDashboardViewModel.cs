@@ -9,9 +9,14 @@ namespace Supreme.ViewModel
     
     public class TaskDashboardViewModel: BaseListViewModel<TaskDashboard>
     {
+
+        #region Property
+
         public ObservableCollection<TaskDashboard> TasksList { get; set; }
 
+        #endregion Property
 
+        #region Method
 
         public TaskDashboardViewModel()
         {
@@ -49,5 +54,8 @@ namespace Supreme.ViewModel
                 TasksList = Items;
             }
         }
+
+        #endregion Method
+
     }
 }

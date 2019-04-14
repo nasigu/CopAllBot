@@ -3,28 +3,16 @@ using System.Windows.Input;
 
 namespace Supreme.ViewModel
 {
-   public abstract class BaseListViewModel<TItem> : BaseViewModel
-       where TItem : Model.BaseItem
-        {
-            #region Constructor
+    public abstract class BaseListViewModel<TItem> : BaseViewModel
+        where TItem : Model.BaseItem
+    {
+        #region Constructor
 
-            //public BaseListViewModel(string displayName, bool isDialog, bool canEdit)
-            //    : base(displayName, isDialog)
-            //{
+        #endregion Constructor
 
-            //    CanEdit = canEdit;
-            //    if (isDialog)
-            //    {
-            //        CanEdit = false;
-            //    }
-            //}
+        #region Property
 
-            #endregion Constructor
-
-            #region Property
-
-            public bool CanEdit { get; private set; }
-
+        public bool CanEdit { get; private set; }
 
         private TItem _Current;
         public TItem Current
@@ -62,28 +50,24 @@ namespace Supreme.ViewModel
         }
 
 
-            #endregion Property
+        #endregion Property
 
-            #region Command
+        #region Command
 
-            //public virtual ICommand EnterCommand { get { return OkDialogCommand; } }
 
-            //private ICommand _refreshCommand;
-            //public ICommand RefreshCommand { get { return _refreshCommand ?? (_refreshCommand = new ActCommand(Refresh, CanRefresh)); } }
+        #endregion Command
 
-            #endregion Command
+        #region Event
 
-            #region Event
-
-            public event EventHandler CurrentChanged;
-            private void NotifyCurrentChanged()
-            {
+        public event EventHandler CurrentChanged;
+        private void NotifyCurrentChanged()
+        {
             CurrentChanged?.Invoke(this, EventArgs.Empty);
         }
 
-            public event EventHandler ItemsChanged;
-            private void NotifyItemsChanged()
-            {
+        public event EventHandler ItemsChanged;
+        private void NotifyItemsChanged()
+        {
             ItemsChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -122,4 +106,4 @@ namespace Supreme.ViewModel
 
         #endregion Method
     }
-    }
+}

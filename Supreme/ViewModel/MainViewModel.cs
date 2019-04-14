@@ -1,4 +1,5 @@
 ﻿using Supreme.Core;
+using Supreme.Model;
 using System.Windows.Input;
 
 namespace Supreme.ViewModel
@@ -36,6 +37,12 @@ namespace Supreme.ViewModel
             get { return _ViewDashboardCommand ?? (_ViewDashboardCommand = new ActCommand(ViewTask)); }
         }
 
+        private ICommand _ViewNewTaskCommand;
+        public ICommand ViewNewTaskCommand
+        {
+            get { return _ViewNewTaskCommand ?? (_ViewNewTaskCommand = new ActCommand(ViewNewTask)); }
+        }
+
         private ICommand _ViewProfileSettingsCommand;
         public ICommand ViewProfileSettingsCommand
         {
@@ -46,6 +53,12 @@ namespace Supreme.ViewModel
         public ICommand ViewComingSoonCommand
         {
             get { return _ViewComingSoonCommand ?? (_ViewComingSoonCommand = new ActCommand(ViewComingSoon)); }
+        }
+
+        private ICommand _ViewTestCommand;
+        public ICommand ViewTestCommand
+        {
+            get { return _ViewTestCommand ?? (_ViewTestCommand = new ActCommand(ViewTest)); }
         }
 
         #endregion Commands
@@ -72,6 +85,11 @@ namespace Supreme.ViewModel
             Current = new TaskDashboardViewModel();
         }
 
+        private void ViewNewTask()
+        {
+            Current = new CreateTaskViewModel();
+        }
+
         private void ViewProfileSettings()
         {
             Current = new ProfileSettingsViewModel();
@@ -80,6 +98,11 @@ namespace Supreme.ViewModel
         private void ViewComingSoon()
         {
             Current = new TaskListViewModel();
+        }
+
+        private void ViewTest()
+        {
+            Current = new TestViewModel(new Test());
         }
 
         #endregion Method
