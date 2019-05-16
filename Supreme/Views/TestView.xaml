@@ -12,10 +12,17 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
         <StackPanel Orientation="Vertical">
             <Label Content="url" HorizontalAlignment="Center"/>
             <TextBox Text="{Binding Item.UrlAddress, Mode=TwoWay}"/>
             <Button Content="add to basket" Command="{Binding AddToBasketCommand}"/>
+            <Button Content="get sizes" Command="{Binding GetSizesCommand}"/>
+            <Button Content="Mobile Testing" Command="{Binding MobileTestingCommand}"/>
+            <Button Content="Desktop Testing" Command="{Binding DesktopTestingCommand}"/>
             <Button Content="checkout"/>
         </StackPanel>
     </Grid>

@@ -23,10 +23,10 @@ namespace Supreme.Core
 
         public enum WEARSIZES
         {
-            SMALL,
-            MEDUIM,
-            LARGE,
-            XLARGE
+            Small,
+            Medium,
+            Large,
+            XLarge
         }
 
         

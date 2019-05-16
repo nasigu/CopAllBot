@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Supreme", "Supreme\Supreme.csproj", "{67E283B8-1BCA-4589-B9F9-2759E0950952}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaptchaHarvester", "CaptchaHarvester\CaptchaHarvester.csproj", "{24F02D5A-E977-4CEB-90ED-8AC83DFC562B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{67E283B8-1BCA-4589-B9F9-2759E0950952}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67E283B8-1BCA-4589-B9F9-2759E0950952}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67E283B8-1BCA-4589-B9F9-2759E0950952}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24F02D5A-E977-4CEB-90ED-8AC83DFC562B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F02D5A-E977-4CEB-90ED-8AC83DFC562B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F02D5A-E977-4CEB-90ED-8AC83DFC562B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F02D5A-E977-4CEB-90ED-8AC83DFC562B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

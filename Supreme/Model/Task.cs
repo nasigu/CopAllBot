@@ -8,16 +8,18 @@ namespace Supreme.Model
         private string _ProductName;
         public string ProductName { get { return _ProductName; } set { if (_ProductName != value) { _ProductName = value; NotifyPropertyChanged(); } } }
 
+        //Style in Supreme
         private string _Color;
         public string Color { get { return _Color; } set { if (_Color != value) { _Color = value; NotifyPropertyChanged(); } } }
 
         private Category _ProductCategory;
         public Category ProductCategory { get { return _ProductCategory; } set { if (_ProductCategory != value) { _ProductCategory = value; NotifyPropertyChanged(); } } }
 
+        //Size in Supreme
         private WEARSIZES _ProductSize;
         public WEARSIZES ProductSize { get { return _ProductSize; } set { if (_ProductSize != value) { _ProductSize = value; NotifyPropertyChanged(); } } }
 
-
+       
     }
 
 
