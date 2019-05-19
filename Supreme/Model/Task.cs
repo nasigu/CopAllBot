@@ -12,12 +12,12 @@ namespace Supreme.Model
         private string _Color;
         public string Color { get { return _Color; } set { if (_Color != value) { _Color = value; NotifyPropertyChanged(); } } }
 
-        private Category _ProductCategory;
-        public Category ProductCategory { get { return _ProductCategory; } set { if (_ProductCategory != value) { _ProductCategory = value; NotifyPropertyChanged(); } } }
+        private string _ProductCategory;
+        public string ProductCategory { get { return _ProductCategory; } set { if (_ProductCategory != value) { _ProductCategory = value; NotifyPropertyChanged(); } } }
 
         //Size in Supreme
-        private WEARSIZES _ProductSize;
-        public WEARSIZES ProductSize { get { return _ProductSize; } set { if (_ProductSize != value) { _ProductSize = value; NotifyPropertyChanged(); } } }
+        private Size _ProductSize;
+        public Size ProductSize { get { return _ProductSize; } set { if (_ProductSize != value) { _ProductSize = value; NotifyPropertyChanged(); } } }
 
        
     }

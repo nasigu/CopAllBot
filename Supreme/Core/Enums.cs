@@ -29,6 +29,6 @@ namespace Supreme.Core
             XLarge
         }
 
-        
+        public enum Size { Small, Medium, Large, XLarge };
     }
 }

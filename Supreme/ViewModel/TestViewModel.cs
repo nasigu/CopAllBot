@@ -13,6 +13,9 @@ using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
+using Supreme.Core.KeywordSearchEngine;
+using Supreme.Model.Supreme;
 
 namespace Supreme.ViewModel
 {
@@ -86,6 +89,9 @@ namespace Supreme.ViewModel
         private ICommand _DesktopTestingCommand;
         public ICommand DesktopTestingCommand { get { return _DesktopTestingCommand ?? (_DesktopTestingCommand = new ActCommand(DesktopTest)); } }
 
+        private ICommand _MobileStockCommand;
+        public ICommand MobileStockCommand { get { return _MobileStockCommand ?? (_MobileStockCommand = new ActCommand(MobileStockTest)); } }
+
 
         #endregion Command
 
@@ -96,7 +102,7 @@ namespace Supreme.ViewModel
             var task = new Model.Task()
             {
                 Color = "Purple",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/shop/304279");
@@ -126,7 +132,7 @@ namespace Supreme.ViewModel
             var task = new Model.Task()
             {
                 Color = "Orange",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/shop/sweatshirts/pma47nqb1/pu4k2tbd6");
@@ -157,7 +163,7 @@ namespace Supreme.ViewModel
             var task = new Model.Task()
             {
                 Color = "Purple",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/shop/cart");
@@ -174,7 +180,7 @@ namespace Supreme.ViewModel
             var task = new Model.Task()
             {
                 Color = "Purple",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/mobile/#checkout");
@@ -193,7 +199,7 @@ namespace Supreme.ViewModel
             var task = new Model.Task()
             {
                 Color = "Purple",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/checkout");
@@ -257,12 +263,14 @@ namespace Supreme.ViewModel
             return response.Content.ReadAsStringAsync().Result;
         }
 
+
+
         async Task<string> SendAddToPaymentsMobileRequestAsync()
         {
             var task = new Model.Task()
             {
                 Color = "Purple",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
             // string EncodedResponse = Request.Form["g-Recaptcha-Response"];
 
@@ -328,12 +336,135 @@ namespace Supreme.ViewModel
             return response.Content.ReadAsStringAsync().Result;
         }
 
+        void MobileStockTest()
+        {
+            var i = GetMobileStockRequestAsync();
+            var dfd = 0;
+        }
+
+        MobileStock GetMobileStockRequestAsync()
+        {
+            var task = new Model.Task()
+            {
+                Color = "White",
+                ProductSize = Enums.Size.Medium,
+                //ProductName = "Putti Tee",
+                ProductName = "Overdyed Pocket, Tee",
+                ProductCategory = "Tops/Sweaters"
+
+            };
+
+
+            string MobileStockJsonString = DownloadHtml("https://www.supremenewyork.com/mobile_stock.json");
+
+            MobileStock data = MobileStock.FromJson(MobileStockJsonString);
+            string IdOfProduct = GetIdByTask(data, task);
+
+
+            Product productData;
+
+            if (IdOfProduct != "")
+            {
+                string ProductJson = DownloadHtml($"https://www.supremenewyork.com/shop/{IdOfProduct}.json");
+                productData = Product.FromJson(ProductJson);
+            }
+            else
+            {
+                // TODO: Log system
+                throw new NotImplementedException();
+            }
+
+            string ColorId = "";
+            string SizeId = "";
+            GetColorIDByTask(productData, task, out ColorId, out SizeId);
+            var i = 0;
+
+            return data;
+
+        }
+
+        private void GetColorIDByTask(Product data, Model.Task task, out string ColorId, out string SizeId)
+        {
+            IKeyWordEngine searchEngine = new AhoCorasick();
+            ColorId = "";
+            SizeId = "";
+            foreach (var item in data.Styles)
+            {
+                if (searchEngine.Search(item.Name, new List<string>() { task.Color.Trim().ToLower() }))
+                {
+                    ColorId = item.Id.ToString();
+
+
+                    foreach (var size in item.Sizes)
+                    {
+                        if (searchEngine.Search(size.Name.ToString(), new List<string>() { task.ProductSize.ToString().Trim().ToLower() }))
+                        {
+                            SizeId = size.Id.ToString();
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        private string GetSizeIDByTask(Product data, Model.Task task)
+        {
+            IKeyWordEngine searchEngine = new AhoCorasick();
+
+            foreach (var item in data.Styles)
+            {
+                if (searchEngine.Search(item.Name, new List<string>() { task.Color }))
+                {
+                    return item.Id.ToString();
+                }
+            }
+            return "";
+        }
+
+        private string GetIdByTask(MobileStock data, Model.Task task)
+        {
+            IKeyWordEngine searchEngine = new AhoCorasick();
+
+            var keywords = new List<string>();
+            foreach (var item in task.ProductName.Split(','))
+            {
+                keywords.Add(item.Trim().ToLower());
+            }
+
+            if (data.ProductsAndCategories.ContainsKey(task.ProductCategory))
+            {
+                foreach (var item in data.ProductsAndCategories[task.ProductCategory])
+                {
+                    if (searchEngine.Search(item.Name, keywords))
+                    {
+                        return item.Id.ToString();
+                    }
+                }
+            }
+
+            if (data.ProductsAndCategories.ContainsKey("new"))
+            {
+                foreach (var item in data.ProductsAndCategories["new"])
+                {
+                    if (searchEngine.Search(item.Name, keywords))
+                    {
+                        return item.Id.ToString();
+                    }
+                }
+            }
+
+            return "";
+        }
+
+
+
         private string cookie(IHtmlDocument Document)
         {
             var task = new Model.Task()
             {
                 Color = "Purple",
-                ProductSize = Enums.WEARSIZES.Medium
+                ProductSize = Enums.Size.Medium
             };
 
             var cartCookie = GetCartCookie(Document, task);
@@ -356,7 +487,7 @@ namespace Supreme.ViewModel
             WebRequest request = (HttpWebRequest)WebRequest.Create("https://www.supremenewyork.com/checkout.json");
             request.Method = "POST"; // для отправки используется метод Post
                                      // данные для отправки
-            string data = $"store_credit_id = {store_credit_id}, from_mobile = 1, cookie-sub = {{\"55920\":1}}, same_as_billing_address = {same_as_billing_address}, authenticity_token = {CSRFToken}, " 
+            string data = $"store_credit_id = {store_credit_id}, from_mobile = 1, cookie-sub = {{\"55920\":1}}, same_as_billing_address = {same_as_billing_address}, authenticity_token = {CSRFToken}, "
                 + $"order[billing_name] = {billing_name}, order[email] = {email}, order[tel] = {tel}, order[billing_address] = {billing_address}, order[billing_address_2] = {billing_address_2}, "
                 + $"order[billing_address_3] = {billing_address_3}, order[billing_city] = {billing_city}, order[billing_zip] = {billing_zip}, order[billing_country] = {billing_country}, "
                 + $"credit_card[type] = {type}, credit_card[cnb] = {cnb}, credit_card[month] = {month}, credit_card[year] = {year}, credit_card[vval] = {vval}, "
@@ -373,7 +504,7 @@ namespace Supreme.ViewModel
             //request.Headers.Add("Accept", "*/*");
 
             //request.Headers.Add("Accept", "*/*");
-            
+
 
             //записываем данные в поток запроса
             using (Stream dataStream = request.GetRequestStream())
@@ -501,7 +632,7 @@ namespace Supreme.ViewModel
             var lskjdf = await SendAddToBasketMobileRequestAsync();
             var mobileCheckout = await SendAddToPaymentsMobileRequestAsync();
             var iuuuui = LoadArtList();
-            var webreq =  await PostRequestAsync();
+            var webreq = await PostRequestAsync();
             var i = 0;
         }
 

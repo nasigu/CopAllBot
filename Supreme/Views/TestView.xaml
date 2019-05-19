@@ -23,6 +23,7 @@
             <Button Content="get sizes" Command="{Binding GetSizesCommand}"/>
             <Button Content="Mobile Testing" Command="{Binding MobileTestingCommand}"/>
             <Button Content="Desktop Testing" Command="{Binding DesktopTestingCommand}"/>
+            <Button Content="Mobile Stock" Command="{Binding MobileStockCommand}"/>
             <Button Content="checkout"/>
         </StackPanel>
     </Grid>
