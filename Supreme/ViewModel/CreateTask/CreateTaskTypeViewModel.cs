@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Supreme.ViewModel
 {
-    public class CreateTaskTypeViewModel : BaseViewModel
+    public class CreateTaskTypeViewModel : BaseStepViewModel, ICreateTaskState
     {
-
+        public override void NextStep(CreateTaskViewModel createTaskVM)
+        {
+            createTaskVM.Current = new CreateTaskSpecificationsViewModel();
+        }
     }
 }

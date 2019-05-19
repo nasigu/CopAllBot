@@ -1,9 +1,10 @@
 ﻿using Supreme.Core;
+using Supreme.Model;
 using System.Windows.Input;
 
 namespace Supreme.ViewModel
 {
-    public class CreateTaskViewModel : BaseViewModel
+    public class CreateTaskViewModel : BaseStepViewModel
     {
         #region Constructor
 
@@ -12,12 +13,13 @@ namespace Supreme.ViewModel
             Current = new CreateTaskTypeViewModel();
         }
 
+
+
         #endregion Constructor
 
         #region Property
 
-        private BaseViewModel _Current;
-        public BaseViewModel Current { get { return _Current; } set { if (_Current != value) { _Current = value; NotifyPropertyChanged(); } } }
+        TaskDashboard Task;
 
         #endregion Property
 
@@ -41,6 +43,12 @@ namespace Supreme.ViewModel
             get { return _ViewFinalizeCommand ?? (_ViewFinalizeCommand = new ActCommand(ViewFinalize)); }
         }
 
+        private ICommand _NextStepCommand;
+        public ICommand NextStepCommand
+        {
+            get { return _NextStepCommand ?? (_NextStepCommand = new ActCommand(NextStep)); }
+        }
+
         #endregion Command
 
 
@@ -54,11 +62,18 @@ namespace Supreme.ViewModel
         private void ViewSpecifications()
         {
             Current = new CreateTaskSpecificationsViewModel();
+            CreateTaskSpecificationsViewModel vm = (CreateTaskSpecificationsViewModel)Current;
+            Task = vm.Task;
         }
 
         private void ViewFinalize()
         {
             Current = new CreateTaskFinalizeViewModel();
+        }
+
+        private void NextStep()
+        {
+            Current.NextStep(this);
         }
 
         #endregion Method

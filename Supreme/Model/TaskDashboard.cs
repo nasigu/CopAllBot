@@ -6,12 +6,13 @@ namespace Supreme.Model
     [DataContract]
     public class TaskDashboard: BaseItem
     {
-        public TaskDashboard(string store, string profile, string size, string product, string log, string action)
+        public TaskDashboard(string store, string profile, string size, string product,string style, string log, string action)
         {
             Store = store;
             Profile = profile;
             Size = size;
             Product = product;
+            Style = style;
             Log = log;
             Action = action;
         }
@@ -35,6 +36,10 @@ namespace Supreme.Model
         [DataMember]
         private string _Product;
         public string Product { get { return _Product; } set { if (_Product != value) { _Product = value; NotifyPropertyChanged(); } } }
+
+        [DataMember]
+        private string _Style;
+        public string Style { get { return _Style; } set { if (_Style != value) { _Style = value; NotifyPropertyChanged(); } } }
 
         [DataMember]
         private string _Log;

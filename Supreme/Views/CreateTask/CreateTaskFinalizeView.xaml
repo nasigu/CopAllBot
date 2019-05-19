@@ -12,7 +12,59 @@
       d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <Image Source="https://d17ol771963kd3.cloudfront.net/assets/logo-supreme-7fbf1f6597b0a6a686e03c82c29b8e7d.png" Width="150" Height="45" VerticalAlignment="Top"/>
-        <Label Content="finalize" FontSize="40" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Content="size" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Countries}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
+                    <Label Grid.Row="0" Grid.Column="1" Content="site name" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Countries}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="size temp" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Task.Product}"  Style="{StaticResource ProfileSettingsTextBoxStyle}" />
+                    <Label Content="task" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Task.Style}" Style="{StaticResource ProfileSettingsTextBoxStyle}" />
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="date *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Task.Size}"  Style="{StaticResource ProfileSettingsTextBoxStyle}" />
+                    <Label Content="date *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource ProfileSettingsTextBoxStyle}" />
+                </Grid>
+            </StackPanel>
+        </Grid>
     </Grid>
 </UserControl>

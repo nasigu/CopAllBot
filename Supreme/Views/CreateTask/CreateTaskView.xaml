@@ -61,7 +61,7 @@
             />
         <!--<Vs:CreateTaskTypeView Grid.Row="1"/>-->
 
-        <Button Grid.Row="2" Style="{StaticResource MainListButtonStyle}" Content="next step" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Button Grid.Row="2" Command="{Binding NextStepCommand}" Style="{StaticResource MainListButtonStyle}" Content="next step" HorizontalAlignment="Center" VerticalAlignment="Center" />
         <!--<TabControl>
             <TabItem Header="TYPE" >
                     <Vs:CreateTaskFinalizeView />

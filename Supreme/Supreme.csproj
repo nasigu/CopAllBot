@@ -110,10 +110,12 @@
     <Compile Include="Model\Task.cs" />
     <Compile Include="Model\TaskDashboard.cs" />
     <Compile Include="Model\Test.cs" />
+    <Compile Include="ViewModel\BaseViewModel\BaseStepViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskFinalizeViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskSpecificationsViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskTypeViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\ICreateTaskState.cs" />
     <Compile Include="ViewModel\ProfileSettingsViewModel.cs" />
     <Compile Include="ViewModel\ArtListViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel\BaseItemViewModel.cs" />

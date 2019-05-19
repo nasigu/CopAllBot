@@ -26,8 +26,8 @@ namespace Supreme.ViewModel
 
         public void WriteTask()
         {
-            TaskDashboard task1 = new TaskDashboard("Supreme", "prof1", "M", "Box Logo Tee", "Idle", "Running");
-            TaskDashboard task2 = new TaskDashboard("Supreme", "prof1", "S", "Box Logo Tee", "Idle", "Running");
+            TaskDashboard task1 = new TaskDashboard("Supreme", "prof1", "M", "Box Logo Tee", "Red", "Idle", "Running");
+            TaskDashboard task2 = new TaskDashboard("Supreme", "prof1", "S", "Box Logo Tee", "White", "Idle", "Running");
             TaskDashboard[] tasks = new TaskDashboard[] { task1, task2 };
 
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TaskDashboard[]));
