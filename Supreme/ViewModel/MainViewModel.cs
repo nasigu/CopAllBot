@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Supreme.ViewModel
 {
-    internal class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel
     {
 
         #region Constructor
@@ -75,32 +75,32 @@ namespace Supreme.ViewModel
             v.Show();
         }
 
-        private void ViewArts()
+        public void ViewArts()
         {
             Current = new ArtListViewModel();
         }
 
-        private void ViewTask()
+        public void ViewTask()
         {
             Current = new TaskDashboardViewModel();
         }
 
-        private void ViewNewTask()
+        public void ViewNewTask()
         {
-            Current = new CreateTaskViewModel();
+            Current = new CreateTaskViewModel(this);
         }
 
-        private void ViewProfileSettings()
+        public void ViewProfileSettings()
         {
             Current = new ProfileSettingsViewModel();
         }
 
-        private void ViewComingSoon()
+        public void ViewComingSoon()
         {
             Current = new TaskListViewModel();
         }
 
-        private void ViewTest()
+        public void ViewTest()
         {
             Current = new TestViewModel(new Test());
         }

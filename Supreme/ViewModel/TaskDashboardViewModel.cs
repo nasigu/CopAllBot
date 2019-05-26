@@ -1,4 +1,6 @@
-﻿using Supreme.Model;
+﻿using Newtonsoft.Json;
+using Supreme.Model;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
@@ -20,8 +22,8 @@ namespace Supreme.ViewModel
 
         public TaskDashboardViewModel()
         {
-            WriteTask();
-            GetTasksList();
+            //WriteTask();
+            GetTaskdfsList();
         }
 
         public void WriteTask()
@@ -37,9 +39,20 @@ namespace Supreme.ViewModel
             }
         }
 
-        public void GetTasksList()
+        public void WriteTdsfask(TaskDashboard task)
         {
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TaskDashboard[]));
+            using (StreamWriter file = File.CreateText("tasks.json"))
+            {
+                JsonSerializer serializer = new JsonSerializer();
+                //serialize object directly into file stream
+                serializer.Serialize(file, task);
+            }
+        }
+
+
+public void GetTasksList()
+        {
+            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TaskDashboard));
             var Items = new ObservableCollection<TaskDashboard>();
 
             using (FileStream fileStream = new FileStream("tasks.json", FileMode.OpenOrCreate))
@@ -49,6 +62,22 @@ namespace Supreme.ViewModel
                 foreach (TaskDashboard task in tasks)
                 {
                     Trace.WriteLine($"profile: {task.Profile} --- product: {task.Product} --- size: {task.Size} --- store: {task.Store} --- log: {task.Log} --- action: {task.Action} ---");
+                    Items.Add(task);
+                }
+                TasksList = Items;
+            }
+        }
+
+        public void GetTaskdfsList()
+        {
+            var Items = new ObservableCollection<TaskDashboard>();
+            using (StreamReader r = new StreamReader("tasks.json"))
+            {
+                string json = r.ReadToEnd();
+                var tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json);
+                var i = 0;
+                foreach (var task in tasks.List)
+                {
                     Items.Add(task);
                 }
                 TasksList = Items;

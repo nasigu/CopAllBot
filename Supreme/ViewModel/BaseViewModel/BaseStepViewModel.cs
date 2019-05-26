@@ -20,5 +20,6 @@ namespace Supreme.ViewModel
         {
             Current = createTaskVM;
         }
+
     }
 }

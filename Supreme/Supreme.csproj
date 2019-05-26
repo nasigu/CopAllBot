@@ -85,12 +85,14 @@
     <Compile Include="Core\ActCommand.cs" />
     <Compile Include="Core\Converters\BaseConverter.cs" />
     <Compile Include="Core\Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Core\Converters\BoolToVisibilityOppositeConverter.cs" />
     <Compile Include="Core\Converters\Supreme\ProductAndCategoryJsonConverter.cs" />
     <Compile Include="Core\Converters\Supreme\ProductJsonConverter.cs" />
     <Compile Include="Core\Converters\Supreme\SizeConverter.cs" />
     <Compile Include="Core\Enums.cs" />
     <Compile Include="Core\KeywordSearchEngine\AhoCorasick.cs" />
     <Compile Include="Core\KeywordSearchEngine\IKeyWordEngine.cs" />
+    <Compile Include="Core\MediatorViewModel.cs" />
     <Compile Include="Core\NotifyTaskCompletion.cs" />
     <Compile Include="Core\ReCaptcha.cs" />
     <Compile Include="Core\TabService.cs" />
@@ -98,6 +100,8 @@
     <Compile Include="Handlers\ArtListHandler.cs" />
     <Compile Include="Model\Country.cs" />
     <Compile Include="Model\CountryList.cs" />
+    <Compile Include="Model\ListTaskDashboard.cs" />
+    <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\Supreme\MobileStock.cs" />
     <Compile Include="Model\Supreme\Product.cs" />
     <Compile Include="Model\Supreme\ProductAndCategory.cs" />
@@ -111,11 +115,16 @@
     <Compile Include="Model\TaskDashboard.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="ViewModel\BaseViewModel\BaseStepViewModel.cs" />
+    <Compile Include="ViewModel\BaseViewModel\BaseTestViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskFinalizeViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskSpecificationsViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskTypeViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\CreateTaskViewModel.cs" />
     <Compile Include="ViewModel\CreateTask\ICreateTaskState.cs" />
+    <Compile Include="ViewModel\CreateTask\TestFinalizeViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\TestMainViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\TestSpecViewModel.cs" />
+    <Compile Include="ViewModel\CreateTask\TestTypeViewModel.cs" />
     <Compile Include="ViewModel\ProfileSettingsViewModel.cs" />
     <Compile Include="ViewModel\ArtListViewModel.cs" />
     <Compile Include="ViewModel\BaseViewModel\BaseItemViewModel.cs" />
@@ -143,6 +152,18 @@
     </Compile>
     <Compile Include="Views\CreateTask\CreateTaskView.xaml.cs">
       <DependentUpon>CreateTaskView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\TestFinalize.xaml.cs">
+      <DependentUpon>TestFinalize.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\TestMain.xaml.cs">
+      <DependentUpon>TestMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\TestSpec.xaml.cs">
+      <DependentUpon>TestSpec.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CreateTask\TestType.xaml.cs">
+      <DependentUpon>TestType.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ProfileSettingsView.xaml.cs">
       <DependentUpon>ProfileSettingsView.xaml</DependentUpon>
@@ -219,6 +240,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateTask\CreateTaskView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\TestFinalize.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\TestMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\TestSpec.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CreateTask\TestType.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

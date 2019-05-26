@@ -9,7 +9,6 @@
       xmlns:vml = "clr-namespace:Supreme.Core"
       xmlns:data ="clr-namespace:Supreme.Model"
       xmlns:c="clr-namespace:Supreme.Core.Converters"
-      vml:ViewModelLocator.AutoHookedUpViewModel = "True"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
 
@@ -48,30 +47,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Command="{Binding ViewTypeCommand}" Background="Transparent" Content="TYPE" Grid.Column="0" FontWeight="Bold"/>
-            <Button Command="{Binding ViewSpecificationsCommand}" Background="Transparent" Content="SPECIFICATIONS" Grid.Column="1" FontWeight="Bold"/>
-            <Button Command="{Binding ViewFinalizeCommand}" Background="Transparent" Content="FINALIZE" Grid.Column="2" FontWeight="Bold"/>
+            <Button Command="{Binding ViewTypeCommand}" BorderThickness="0" Background="#FF252640" Foreground="White" Content="TYPE" Grid.Column="0" FontWeight="Bold"/>
+            <Button Command="{Binding ViewSpecificationsCommand}" BorderThickness="0" Background="#FF252640" Foreground="White" Content="SPECIFICATIONS" Grid.Column="1" FontWeight="Bold"/>
+            <Button Command="{Binding ViewFinalizeCommand}" BorderThickness="0" Background="#FF252640" Foreground="White" Content="FINALIZE" Grid.Column="2" FontWeight="Bold"/>
+
         </Grid>
-
         <ContentControl 
-
             Grid.Row="1"
                 Margin="40,0,40,0"
             Content="{Binding Path=Current}"
             />
-        <!--<Vs:CreateTaskTypeView Grid.Row="1"/>-->
 
-        <Button Grid.Row="2" Command="{Binding NextStepCommand}" Style="{StaticResource MainListButtonStyle}" Content="next step" HorizontalAlignment="Center" VerticalAlignment="Center" />
-        <!--<TabControl>
-            <TabItem Header="TYPE" >
-                    <Vs:CreateTaskFinalizeView />
-                </TabItem>
-                <TabItem Header="SPECIFICATIONS" >
-                    <Vs:CreateTaskSpecificationsView/>
-                </TabItem>
-            <TabItem Header="FINALIZE">
-                <Vs:CreateTaskFinalizeView/>
-            </TabItem>
-        </TabControl>-->
+        <Button Grid.Row="2" Command="{Binding NextStepCommand}" Style="{StaticResource MainListButtonStyle}" Content="next step" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding CanCreate, Converter={c:BoolToVisibilityOppositeConverter}}" />
+        <Button Grid.Row="2" Command="{Binding CreateTaskCommand}" Style="{StaticResource MainListButtonStyle}" Content="create task" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{Binding CanCreate, Converter={c:BoolToVisibilityConverter}}" />
     </Grid>
 </UserControl>

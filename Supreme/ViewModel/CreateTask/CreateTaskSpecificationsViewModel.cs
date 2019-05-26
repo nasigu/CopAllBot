@@ -1,23 +1,31 @@
-﻿
-using Supreme.Core;
-using Supreme.Model;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+﻿using Supreme.Model;
 
 namespace Supreme.ViewModel
 {
-    public class CreateTaskSpecificationsViewModel : BaseStepViewModel, ICreateTaskState
+    public class CreateTaskSpecificationsViewModel : BaseStepViewModel
     {
-        public TaskDashboard Task { get; set; }
+
+        public CreateTaskViewModel Parent { get; set; }
+
 
         public CreateTaskSpecificationsViewModel()
         {
-            Task = new TaskDashboard("Supreme","prof1","","","","","Add");
-        }  
+        }
 
-        public override void NextStep(CreateTaskViewModel createTaskVM)
+        public CreateTaskSpecificationsViewModel(CreateTaskViewModel parent)
         {
-            createTaskVM.Current = new CreateTaskFinalizeViewModel();
+            Parent = parent;
+        }
+
+
+
+
+        public override void NextStep(CreateTaskViewModel CreateTaskVM)
+        {
+            Parent.CanCreate = true;
+
+            CreateTaskVM.Current = CreateTaskVM.finalize;
+
         }
     }
 }

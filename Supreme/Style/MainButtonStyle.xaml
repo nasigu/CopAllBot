@@ -7,7 +7,7 @@
         <Setter Property="Control.Background" Value="Transparent" />
         <Setter Property="Control.Foreground" Value="White" />
         <Setter Property="Control.Margin" Value="10" />
-        <Setter Property="Control.Width" Value="70" />
+        <Setter Property="Control.Width" Value="100" />
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
