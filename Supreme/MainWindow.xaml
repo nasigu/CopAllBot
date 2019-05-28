@@ -35,7 +35,14 @@
                 DataType="{x:Type VMs:TestViewModel}">
                 <Vs:TestView />
             </DataTemplate>
+            <Style TargetType="{x:Type TextBox}">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="Foreground" Value="White" />
+            </Style>
         </ResourceDictionary>
+        
     </Window.Resources>
 
         <Grid>

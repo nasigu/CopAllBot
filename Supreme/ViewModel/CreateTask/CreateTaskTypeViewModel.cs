@@ -22,7 +22,6 @@ namespace Supreme.ViewModel
         public CreateTaskTypeViewModel()
         {
             //CurrentTask = new TaskDashboard();
-            CurrentTask = new TaskDashboard("Supreme", "prof1", "ddd", "", "", "", "Add");
 
         }
 
@@ -34,7 +33,7 @@ namespace Supreme.ViewModel
 
         public override void NextStep(CreateTaskViewModel CreateTaskVM)
         {
-
+            CreateTaskVM.CurrentTask.Store = "Supreme";
             CreateTaskVM.Current = CreateTaskVM.spec;
 
         }

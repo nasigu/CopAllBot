@@ -8,6 +8,6 @@ namespace Supreme.Model
 {
     public class ListTaskDashboard
     {
-        public List<TaskDashboard> List { get; set; }
+        public List<TaskDashboard> Tasks { get; set; }
     }
 }

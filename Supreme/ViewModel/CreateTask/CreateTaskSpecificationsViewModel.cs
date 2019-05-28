@@ -1,4 +1,7 @@
-﻿using Supreme.Model;
+﻿using Newtonsoft.Json;
+using Supreme.Model;
+using System.Collections.ObjectModel;
+using System.IO;
 
 namespace Supreme.ViewModel
 {
@@ -7,6 +10,9 @@ namespace Supreme.ViewModel
 
         public CreateTaskViewModel Parent { get; set; }
 
+        public ObservableCollection<string> Mode { get; set; }
+
+        public ObservableCollection<Profile> Profiles { get; set; }
 
         public CreateTaskSpecificationsViewModel()
         {
@@ -14,6 +20,23 @@ namespace Supreme.ViewModel
 
         public CreateTaskSpecificationsViewModel(CreateTaskViewModel parent)
         {
+            Mode = new ObservableCollection<string>()
+            {
+                "keywords",
+                "url"
+            };
+
+            var profiles = new ObservableCollection<Profile>();
+            using (StreamReader r = new StreamReader("profiles.json"))
+            {
+                string json = r.ReadToEnd();
+                var tasks = JsonConvert.DeserializeObject<ListProfiles>(json);
+                foreach (var task in tasks.Profiles)
+                {
+                    profiles.Add(task);
+                }
+                Profiles = profiles;
+            }
             Parent = parent;
         }
 

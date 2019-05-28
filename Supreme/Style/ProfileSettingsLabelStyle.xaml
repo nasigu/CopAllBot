@@ -5,7 +5,7 @@
         <Setter Property="FontFamily" Value="Helvetica" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="Foreground" Value="#999" />
-        <Setter Property="Margin" Value="10,0,10,-5" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="MinWidth" Value="80" />
     </Style>
 </ResourceDictionary>

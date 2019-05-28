@@ -16,7 +16,7 @@ namespace Supreme.ViewModel
         public CreateTaskViewModel()
         {
             CanCreate = false;
-            CurrentTask = new TaskDashboard("Supreme", "prof1", "ddd", "", "", "", "Add");
+            CurrentTask = new TaskDashboard();
             typed = new CreateTaskTypeViewModel(this);
             spec = new CreateTaskSpecificationsViewModel(this);
             finalize = new CreateTaskFinalizeViewModel(this);
@@ -27,10 +27,11 @@ namespace Supreme.ViewModel
         {
             MainViewModel = mainViewModel;
             CanCreate = false;
-            CurrentTask = new TaskDashboard("Supreme", "prof1", "ddd", "", "", "", "Add");
+            CurrentTask = new TaskDashboard();
             typed = new CreateTaskTypeViewModel(this);
             spec = new CreateTaskSpecificationsViewModel(this);
             finalize = new CreateTaskFinalizeViewModel(this);
+            NotifyPropertyChangedAll();
             Current = typed;
         }
 
@@ -131,8 +132,8 @@ namespace Supreme.ViewModel
             {
                 string json = r.ReadToEnd();
                 tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json) ?? new ListTaskDashboard();
-                tasks.List =  tasks.List ?? new List<TaskDashboard>();
-                tasks.List.Add(CurrentTask);
+                tasks.Tasks =  tasks.Tasks ?? new List<TaskDashboard>();
+                tasks.Tasks.Add(CurrentTask);
                 
             }
 

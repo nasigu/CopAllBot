@@ -3,14 +3,8 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:Supreme.Views"
-      xmlns:vml = "clr-namespace:Supreme.Core"
-      xmlns:data ="clr-namespace:Supreme.Model"
-      xmlns:c="clr-namespace:Supreme.Core.Converters"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
-
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -24,6 +18,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -31,9 +26,11 @@
 
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="mode" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Countries}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
-                    <Label Grid.Row="0" Grid.Column="1" Content="site name" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Countries}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
+                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Mode}" MaxHeight="20" SelectedItem="{Binding SelectedMode}" IsSynchronizedWithCurrentItem="True"  Margin="15,0"/>
+                    <Label Content="task count *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,25" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="0" Margin="15" />
+                    <Label Grid.Row="0" Grid.Column="2" Content="profile" Style="{StaticResource ProfileSettingsLabelStyle}"/>
+                    <ComboBox Grid.Row="1" Grid.Column="2" MaxHeight="20" ItemsSource="{Binding Path=Profiles}" SelectedItem="{Binding SelectedProfile}" IsSynchronizedWithCurrentItem="True"  DisplayMemberPath="ProfileName" Margin="15,0"/>
                 </Grid>
 
                 <Grid>
@@ -46,11 +43,11 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="keywords/url *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Grid.ColumnSpan="2" Margin="10,0,10,25" Grid.RowSpan="2"/>
+                    <Label Content="keywords/url *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Grid.ColumnSpan="2" Margin="10,0,10,35" Grid.RowSpan="2"/>
                     <!--<TextBox Grid.Column="0" Grid.Row="1" Text="{Binding RelativeSource={RelativeSource AncestorType={x:Type local:CreateTaskView}}, Path=TestObject.Product}" Style="{StaticResource ProfileSettingsTextBoxStyle}"/>-->
-                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Parent.CurrentTask.Product}" Style="{StaticResource ProfileSettingsTextBoxStyle}" Grid.ColumnSpan="2"/>
-                    <Label Content="style *" Grid.Column="2" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,25" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="1" Grid.Column="2" Text="{Binding TestTask.Style}" Style="{StaticResource ProfileSettingsTextBoxStyle}" />
+                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Parent.CurrentTask.Product}" Margin="15" Grid.ColumnSpan="2"/>
+                    <Label Content="style *" Grid.Column="2" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,35" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="1" Grid.Column="2" Margin="15" Text="{Binding Parent.CurrentTask.Style}"  />
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -62,10 +59,10 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Label Content="size *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,25" Grid.RowSpan="2"/>
-                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding TestTask.Size}"  Style="{StaticResource ProfileSettingsTextBoxStyle}" />
-                    <Label Content="category *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Grid.ColumnSpan="2" Margin="10,0,10,25" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource ProfileSettingsTextBoxStyle}" Grid.ColumnSpan="2" />
+                    <Label Content="size *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,35" Grid.RowSpan="2"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Parent.CurrentTask.Size}"  Margin="15" />
+                    <Label Content="category" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Grid.ColumnSpan="2" Margin="10,0,10,35" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="1" Text="{Binding Parent.CurrentTask.Category}"  Grid.Column="1" Margin="15" Grid.ColumnSpan="2" />
                     <!--<Button Command="{Binding GetCommand}">HIT</Button>-->
                 </Grid>
             </StackPanel>

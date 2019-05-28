@@ -8,8 +8,8 @@ using System.Runtime.Serialization.Json;
 
 namespace Supreme.ViewModel
 {
-    
-    public class TaskDashboardViewModel: BaseListViewModel<TaskDashboard>
+
+    public class TaskDashboardViewModel : BaseListViewModel<TaskDashboard>
     {
 
         #region Property
@@ -50,7 +50,7 @@ namespace Supreme.ViewModel
         }
 
 
-public void GetTasksList()
+        public void GetTasksList()
         {
             DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TaskDashboard));
             var Items = new ObservableCollection<TaskDashboard>();
@@ -61,7 +61,6 @@ public void GetTasksList()
 
                 foreach (TaskDashboard task in tasks)
                 {
-                    Trace.WriteLine($"profile: {task.Profile} --- product: {task.Product} --- size: {task.Size} --- store: {task.Store} --- log: {task.Log} --- action: {task.Action} ---");
                     Items.Add(task);
                 }
                 TasksList = Items;
@@ -76,7 +75,7 @@ public void GetTasksList()
                 string json = r.ReadToEnd();
                 var tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json);
                 var i = 0;
-                foreach (var task in tasks.List)
+                foreach (var task in tasks.Tasks)
                 {
                     Items.Add(task);
                 }

@@ -1,58 +1,71 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Runtime.Serialization;
 
 namespace Supreme.Model
 {
+    [DataContract]
     public class Profile: BaseItem
     {
         #region Property
 
+        [DataMember(Name = "Name")]
         private string _ProfileName;
         public string ProfileName { get { return _ProfileName; } set { if (_ProfileName != value) { _ProfileName = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "FullName")]
         private string _ProfileFullName;
         public string ProfileFullName { get { return _ProfileFullName; } set { if (_ProfileFullName != value) { _ProfileFullName = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Email")]
         private string _ProfileEmail;
         public string ProfileEmail { get { return _ProfileEmail; } set { if (_ProfileEmail != value) { _ProfileEmail = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Tel")]
         private string _ProfileTel;
         public string ProfileTel { get { return _ProfileTel; } set { if (_ProfileTel != value) { _ProfileTel = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Address")]
         private string _ProfileAddress;
         public string ProfileAddress { get { return _ProfileAddress; } set { if (_ProfileAddress != value) { _ProfileAddress = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Address2")]
         private string _ProfileAddress2;
         public string ProfileAddress2 { get { return _ProfileAddress2; } set { if (_ProfileAddress2 != value) { _ProfileAddress2 = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Address3")]
         private string _ProfileAddress3;
         public string ProfileAddress3 { get { return _ProfileAddress3; } set { if (_ProfileAddress3 != value) { _ProfileAddress3 = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Country")]
         private string _ProfileCountry;
         public string ProfileCountry { get { return _ProfileCountry; } set { if (_ProfileCountry != value) { _ProfileCountry = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "City")]
         private string _ProfileCity;
         public string ProfileCity { get { return _ProfileCity; } set { if (_ProfileCity != value) { _ProfileCity = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "PostCode")]
         private string _ProfilePostCode;
         public string ProfilePostCode { get { return _ProfilePostCode; } set { if (_ProfilePostCode != value) { _ProfilePostCode = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "CreditCardType")]
         private string _ProfileCreditCardType;
         public string ProfileCreditCardType { get { return _ProfileCreditCardType; } set { if (_ProfileCreditCardType != value) { _ProfileCreditCardType = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "CardNumber")]
         private string _ProfileCreditCardNumber;
         public string ProfileCreditCardNumber { get { return _ProfileCreditCardNumber; } set { if (_ProfileCreditCardNumber != value) { _ProfileCreditCardNumber = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "ExpiryMonth")]
         private int _ProfileExpiryMonth;
         public int ProfileExpiryMonth { get { return _ProfileExpiryMonth; } set { if (_ProfileExpiryMonth != value) { _ProfileExpiryMonth = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "ExpiryYear")]
         private int _ProfileExpiryYear;
         public int ProfileExpiryYear { get { return _ProfileExpiryYear; } set { if (_ProfileExpiryYear != value) { _ProfileExpiryYear = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "CardCVV")]
         private int _ProfileCardCVV;
         public int ProfileCardCVV { get { return _ProfileCardCVV; } set { if (_ProfileCardCVV != value) { _ProfileCardCVV = value; NotifyPropertyChanged(); } } }
 
