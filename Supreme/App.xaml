@@ -19,7 +19,9 @@
                 <ResourceDictionary
                     Source="Style/test.xaml"/>
                 
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

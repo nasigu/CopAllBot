@@ -7,13 +7,66 @@
       xmlns:vml = "clr-namespace:Supreme.Core"
       xmlns:data ="clr-namespace:Supreme.Model"
       xmlns:c="clr-namespace:Supreme.Core.Converters"
+      xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800">
+    <!--<UserControl.Resources>
+        <DataTemplate DataType="{x:Type data:TaskDashboard}">
+            <Grid>
+                <Image Source="{Binding Path=Image}" Width="81" Height="81" Panel.ZIndex="0"/>
+                <TextBlock Name="SoldOutBlock" Style="{StaticResource ResourceKey=SoltOutTagStyle}">
+                    sold<LineBreak/>out
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
 
+        <ItemsPanelTemplate x:Key="listPanelTemplate">
+            <WrapPanel />
+        </ItemsPanelTemplate>
+    </UserControl.Resources>-->
     <Grid>
-        <Image Source="https://d17ol771963kd3.cloudfront.net/assets/logo-supreme-7fbf1f6597b0a6a686e03c82c29b8e7d.png" Width="150" Height="45" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="40*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--<Image Source="https://d17ol771963kd3.cloudfront.net/assets/logo-supreme-7fbf1f6597b0a6a686e03c82c29b8e7d.png" Width="150" Height="45" VerticalAlignment="Top"/>-->
         <!--<Label Content="type" FontSize="40" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>-->
         <!--<Button Grid.Row="2" Command="{Binding NextStepCommand}" Style="{StaticResource MainListButtonStyle}" Content="next step" HorizontalAlignment="Center" VerticalAlignment="Bottom" />-->
-
+        <!--<ListBox Grid.Column="1" Grid.Row="1" x:Name="ArtListBox"                      
+                 ItemsPanel="{StaticResource listPanelTemplate}"                
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                 BorderBrush="White" 
+                 ItemsSource="{Binding CurrentTask.Store}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseEnter">
+                    <i:InvokeCommandAction Command="{Binding Path=DoSomethingCommand}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </ListBox>-->
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Button>
+                <StackPanel>
+                    <Image Source="/Resources/Images/supremedark.png" />
+                </StackPanel>
+            </Button>
+        </Grid>
     </Grid>
 </UserControl>

@@ -59,65 +59,101 @@ namespace Supreme.Model
         #endregion Property
     }
 
-    public class CreditCardType
+    public class CreditCardType: BaseItem
     {
-        public string CardType { get; set; }
 
-        private static ObservableCollection<string> _CardTypes = new ObservableCollection<string>()
+        private string _CardType;
+        public string CardType { get { return _CardType; } set { if (_CardType != value) { _CardType = value; NotifyPropertyChanged(); } } }
+
+        private CreditCardType(string creditCard)
         {
-            "Visa",
-            "American Express",
-            "Mastercard",
-            "Solo",
-            "PayPal"
+            CardType = creditCard;
+        }
+
+        public CreditCardType()
+        {
+        }
+
+        private static ObservableCollection<CreditCardType> _CardTypes = new ObservableCollection<CreditCardType>()
+        {
+            new CreditCardType("Visa"),
+            new CreditCardType("American Express"),
+            new CreditCardType("Mastercard"),
+            new CreditCardType("Solo"),
+            new CreditCardType("PayPal")
         };
 
-        public ObservableCollection<string> CardTypes = _CardTypes;
+        public ObservableCollection<CreditCardType> CardTypes = _CardTypes;
 
     }
 
-    public class ExpiryMonth
+    public class ExpiryMonth: BaseItem
     {
-        private static ObservableCollection<string> _ExpiryMonthList = new ObservableCollection<string>()
+        private ExpiryMonth(string month)
         {
-            "01",
-            "02",
-            "03",
-            "04",
-            "05",
-            "06",
-            "07",
-            "08",
-            "09",
-            "10",
-            "11",
-            "12"
+            Month = month;
+        }
+
+        public ExpiryMonth()
+        {
+        }
+
+        private string _Month;
+        public string Month { get { return _Month; } set { if (_Month != value) { _Month = value; NotifyPropertyChanged(); } } }
+
+        private static ObservableCollection<ExpiryMonth> _ExpiryMonthList = new ObservableCollection<ExpiryMonth>()
+        {
+            new ExpiryMonth("01"),
+            new ExpiryMonth("02"),
+            new ExpiryMonth("03"),
+            new ExpiryMonth("04"),
+            new ExpiryMonth("05"),
+            new ExpiryMonth("06"),
+            new ExpiryMonth("07"),
+            new ExpiryMonth("08"),
+            new ExpiryMonth("09"),
+            new ExpiryMonth("10"),
+            new ExpiryMonth("11"),
+            new ExpiryMonth("12"),
 
         };
 
-        public ObservableCollection<string> ExpiryMonthList = _ExpiryMonthList;
+        public  ObservableCollection<ExpiryMonth> ExpiryMonthList = _ExpiryMonthList;
 
     }
 
-    public class ExpiryYear
+    public class ExpiryYear: BaseItem
     {
-        private static ObservableCollection<string> _ExpiryYearList = new ObservableCollection<string>()
+
+        private string _Year;
+        public string Year { get { return _Year; } set { if (_Year != value) { _Year = value; NotifyPropertyChanged(); } } }
+
+        public ExpiryYear()
         {
-             DateTime.Now.Year.ToString(),
-            (DateTime.Now.Year + 1).ToString() ,
-            (DateTime.Now.Year + 2).ToString() ,
-            (DateTime.Now.Year + 3).ToString() ,
-            (DateTime.Now.Year + 4).ToString() ,
-            (DateTime.Now.Year + 5).ToString() ,
-            (DateTime.Now.Year + 6).ToString() ,
-            (DateTime.Now.Year + 7).ToString() ,
-            (DateTime.Now.Year + 8).ToString() ,
-            (DateTime.Now.Year + 9).ToString() ,
-            (DateTime.Now.Year + 10).ToString()
+        }
+
+        private ExpiryYear(string year)
+        {
+            Year = year;
+        }
+
+        private static ObservableCollection<ExpiryYear> _ExpiryYearList = new ObservableCollection<ExpiryYear>()
+        {
+             new ExpiryYear(DateTime.Now.Year.ToString()),
+             new ExpiryYear((DateTime.Now.Year + 1).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 2).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 3).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 4).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 5).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 6).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 7).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 8).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 9).ToString()),
+             new ExpiryYear((DateTime.Now.Year + 10).ToString())
 
         };
 
-        public ObservableCollection<string> ExpiryYearList = _ExpiryYearList;
+        public ObservableCollection<ExpiryYear> ExpiryYearList = _ExpiryYearList;
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Supreme.Core;
 using Supreme.Model;
+using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows.Input;
@@ -14,9 +15,9 @@ namespace Supreme.ViewModel
         public Profile Profile { get; set; }
 
         public ObservableCollection<Country> Countries { get; set; }
-        public ObservableCollection<string> CardTypes { get; set; }
-        public ObservableCollection<string> ExpiryMonth { get; set; }
-        public ObservableCollection<string> ExpiryYears { get; set; }
+        public ObservableCollection<CreditCardType> CardTypes { get; set; }
+        public ObservableCollection<ExpiryMonth> ExpiryMonth { get; set; }
+        public ObservableCollection<ExpiryYear> ExpiryYears { get; set; }
 
         private Country _SelectedCountry;
         public Country SelectedCountry
@@ -57,6 +58,9 @@ namespace Supreme.ViewModel
             ExpiryYears = new ExpiryYear().ExpiryYearList;
 
             SelectedCountry = new Country() { Id = 1, CountryName = "UK" };
+            SelectedCardType = new CreditCardType() { Id = 1, CardType = "Visa" };
+            SelectedExpityMonth = new ExpiryMonth() { Id = 1, Month = "01" };
+            SelectedExpityYear = new ExpiryYear() { Id = 1, Year = DateTime.Now.Year.ToString() };
             
 
         }
@@ -72,11 +76,10 @@ namespace Supreme.ViewModel
         public void CreateProfile()
         {
             Profile.ProfileCountry = SelectedCountry.CountryName;
-            Profile.ProfileCreditCardType = SelectedCardType.CardTypes.ToString();
-            //Profile.ProfileExpiryMonth = SelectedExpityMonth.ExpiryMonthList;
+            Profile.ProfileCreditCardType = SelectedCardType.CardType.ToString();
+            Profile.ProfileExpiryMonth = Convert.ToInt32(SelectedExpityMonth.Month);
+            Profile.ProfileExpiryYear = Convert.ToInt32(SelectedExpityYear.Year);
 
-            var fd = Profile;
-            var i = 0;
         }
 
         #endregion Method

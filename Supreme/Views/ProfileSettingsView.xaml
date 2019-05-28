@@ -80,7 +80,7 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="credit card type *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Column="0" ItemsSource="{Binding CardTypes}" SelectedItem="{Binding SelectedCardType}" Grid.Row="1"/>
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding CardTypes}" DisplayMemberPath="CardType" SelectedItem="{Binding SelectedCardType}" Grid.Row="1"/>
                     <Label Content="credit card number *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
                     <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Profile.ProfileCreditCardNumber}"  Style="{StaticResource ProfileSettingsTextBoxStyle}" />
                 </Grid>
@@ -95,9 +95,9 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="expiry month *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Column="0" ItemsSource="{Binding ExpiryMonth}" SelectedItem="{Binding SelectedExpiryMonth}" Grid.Row="1" />
+                    <ComboBox Grid.Column="0" ItemsSource="{Binding ExpiryMonth}" DisplayMemberPath="Month" SelectedItem="{Binding SelectedExpiryMonth}" Grid.Row="1" />
                     <Label Content="expiry year *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Column="1" ItemsSource="{Binding ExpiryYears}" SelectedItem="{Binding SelectedExpiryYear}" Grid.Row="1"  />
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding ExpiryYears}" DisplayMemberPath="Year" SelectedItem="{Binding SelectedExpiryYear}" Grid.Row="1"  />
                     <Label Content="credit card number *" Grid.Column="2" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
                     <TextBox Grid.Column="2" Grid.Row="1" Style="{StaticResource ProfileSettingsTextBoxStyle}" />
                 </Grid>

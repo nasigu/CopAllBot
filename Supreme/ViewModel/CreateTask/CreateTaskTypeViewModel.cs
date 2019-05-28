@@ -2,6 +2,7 @@
 using Supreme.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,8 @@ namespace Supreme.ViewModel
         public TaskDashboard CurrentTask;
 
         public CreateTaskViewModel Parent { get; set; }
+
+        public ObservableCollection<string> Images { get; set; }
 
 
         public CreateTaskTypeViewModel()
