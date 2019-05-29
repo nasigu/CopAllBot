@@ -17,6 +17,8 @@
                 <ResourceDictionary
                     Source="Style/BaseComboBoxStyle.xaml"/>
                 <ResourceDictionary
+                    Source="Style/ComboBoxMainStyle.xaml"/>
+                <ResourceDictionary
                     Source="Style/test.xaml"/>
                 
                 

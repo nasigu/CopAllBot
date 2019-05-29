@@ -26,11 +26,11 @@
 
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="mode" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Mode}" MaxHeight="20" SelectedItem="{Binding SelectedMode}" IsSynchronizedWithCurrentItem="True"  Margin="15,0"/>
+                    <ComboBox Grid.Row="1" Template="{StaticResource ComboBoxMainStyle}" ItemsSource="{Binding Path=Mode}" MaxHeight="20" SelectedItem="{Binding SelectedMode}" IsSynchronizedWithCurrentItem="True"  Margin="15,0"/>
                     <Label Content="task count *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,25" Grid.RowSpan="2"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text="0" Margin="15" />
                     <Label Grid.Row="0" Grid.Column="2" Content="profile" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="2" MaxHeight="20" ItemsSource="{Binding Path=Profiles}" SelectedItem="{Binding SelectedProfile}" IsSynchronizedWithCurrentItem="True"  DisplayMemberPath="ProfileName" Margin="15,0"/>
+                    <ComboBox Grid.Row="1" Grid.Column="2" Template="{StaticResource ComboBoxMainStyle}" MaxHeight="20" ItemsSource="{Binding Path=Profiles}" SelectedItem="{Binding SelectedProfile}" IsSynchronizedWithCurrentItem="True"  DisplayMemberPath="ProfileName" Margin="15,0"/>
                 </Grid>
 
                 <Grid>
@@ -60,7 +60,8 @@
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <Label Content="size *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,35" Grid.RowSpan="2"/>
-                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Parent.CurrentTask.Size}"  Margin="15" />
+                    <!--<TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Parent.CurrentTask.Size}"  Margin="15" />-->
+                    <ComboBox Grid.Row="1" Template="{StaticResource ComboBoxMainStyle}" ItemsSource="{Binding Path=Sizes}" MaxHeight="20" IsSynchronizedWithCurrentItem="True"  Margin="15,0"/>
                     <Label Content="category" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Grid.ColumnSpan="2" Margin="10,0,10,35" Grid.RowSpan="2"/>
                     <TextBox Grid.Row="1" Text="{Binding Parent.CurrentTask.Category}"  Grid.Column="1" Margin="15" Grid.ColumnSpan="2" />
                     <!--<Button Command="{Binding GetCommand}">HIT</Button>-->

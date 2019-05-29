@@ -30,9 +30,9 @@
 
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="size" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Countries}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
+                    <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Countries}" Template="{StaticResource ComboBoxMainStyle}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
                     <Label Grid.Row="0" Grid.Column="1" Content="site name" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Countries}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Countries}" Template="{StaticResource ComboBoxMainStyle}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
                 </Grid>
 
                 <Grid>
