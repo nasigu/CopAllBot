@@ -99,6 +99,7 @@
     <Compile Include="Core\ViewModelLocator.cs" />
     <Compile Include="Handlers\ArtListHandler.cs" />
     <Compile Include="Model\ListProfiles.cs" />
+    <Compile Include="Model\Mode.cs" />
     <Compile Include="Model\Supreme\Country.cs" />
     <Compile Include="Model\Supreme\CountryList.cs" />
     <Compile Include="Model\ListTaskDashboard.cs" />

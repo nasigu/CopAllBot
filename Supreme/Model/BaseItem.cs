@@ -27,25 +27,5 @@ namespace Supreme.Model
             Removed?.Invoke(this, EventArgs.Empty);
         }
 
-        //enum Category
-        //{
-        //    ALL,
-        //    NEW,
-        //    JACKETS,
-        //    SHIRTS,
-        //    TOPSANDSWEATERS,
-        //    PANTS,
-        //    HATS,
-        //    BAGS,
-        //    ACCESSORIES
-        //}
-
-        //enum WEARSIZES
-        //{
-        //    SMALL,
-        //    MEDUIM,
-        //    LARGE,
-        //    XLARGE
-        //}
     }
 }

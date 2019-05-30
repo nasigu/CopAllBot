@@ -46,6 +46,14 @@ namespace Supreme.Model
         private string _Style;
         public string Style { get { return _Style; } set { if (_Style != value) { _Style = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Category")]
+        private string _Category;
+        public string Category { get { return _Category; } set { if (_Category != value) { _Category = value; NotifyPropertyChanged(); } } }
+
+        [DataMember(Name = "Date")]
+        private string _Date;
+        public string Date { get { return _Date; } set { if (_Date != value) { _Date = value; NotifyPropertyChanged(); } } }
+
         [DataMember(Name = "Log")]
         private string _Log;
         public string Log { get { return _Log; } set { if (_Log != value) { _Log = value; NotifyPropertyChanged(); } } }

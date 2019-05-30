@@ -63,9 +63,9 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Button>
-                <StackPanel>
+                <!--<StackPanel>
                     <Image Source="/Resources/Images/supremedark.png" />
-                </StackPanel>
+                </StackPanel>-->
             </Button>
         </Grid>
     </Grid>

@@ -73,7 +73,7 @@ namespace Supreme.ViewModel
             using (StreamReader r = new StreamReader("tasks.json"))
             {
                 string json = r.ReadToEnd();
-                var tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json);
+                var tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json) ?? new ListTaskDashboard();
                 var i = 0;
                 foreach (var task in tasks.Tasks)
                 {

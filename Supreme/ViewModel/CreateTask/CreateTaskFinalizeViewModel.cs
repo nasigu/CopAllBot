@@ -28,9 +28,9 @@ namespace Supreme.ViewModel
 
         #region Method
 
-        public override void NextStep(CreateTaskViewModel CreateTaskVM)
+        public override void NextStep(CreateTaskViewModel createTaskVm)
         {
-            CreateTaskVM.Current = new CreateTaskFinalizeViewModel();
+            createTaskVm.Current = new CreateTaskFinalizeViewModel();
         }
 
         #endregion Method

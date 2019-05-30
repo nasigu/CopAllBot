@@ -31,28 +31,13 @@
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Content="size" Style="{StaticResource ProfileSettingsLabelStyle}"/>
                     <ComboBox Grid.Row="1" ItemsSource="{Binding Path=Countries}" Template="{StaticResource ComboBoxMainStyle}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
-                    <Label Grid.Row="0" Grid.Column="1" Content="site name" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Path=Countries}" Template="{StaticResource ComboBoxMainStyle}" SelectedItem="{Binding SelectedCountry}"  DisplayMemberPath="CountryName" Margin="5,0"/>
                 </Grid>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Label Content="size temp" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Task.Product}"  Style="{StaticResource ProfileSettingsTextBoxStyle}" />
-                    <Label Content="task" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Task.Style}" Style="{StaticResource ProfileSettingsTextBoxStyle}" />
-                </Grid>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="7*"/>
+                        <ColumnDefinition Width="13*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"/>
@@ -60,8 +45,6 @@
                     </Grid.RowDefinitions>
                     <Label Content="date *" Grid.Column="0" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
                     <TextBox Grid.Column="0" Grid.Row="1" Text="{Binding Task.Size}"  Style="{StaticResource ProfileSettingsTextBoxStyle}" />
-                    <Label Content="date *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Style="{StaticResource ProfileSettingsTextBoxStyle}" />
                 </Grid>
             </StackPanel>
         </Grid>

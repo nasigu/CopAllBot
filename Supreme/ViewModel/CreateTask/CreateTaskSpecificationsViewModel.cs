@@ -3,6 +3,7 @@ using Supreme.Core;
 using Supreme.Model;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 
 namespace Supreme.ViewModel
 {
@@ -16,6 +17,27 @@ namespace Supreme.ViewModel
         public ObservableCollection<Profile> Profiles { get; set; }
 
         public ObservableCollection<Enums.Size> Sizes { get; set; }
+
+        private string _SelectedMode;
+        public string SelectedMode
+        {
+            get { return _SelectedMode; }
+            set { if (_SelectedMode != value) { _SelectedMode = value; NotifyPropertyChanged(); } }
+        }
+
+        private Enums.Size _SelectedSizes;
+        public Enums.Size SelectedSizes
+        {
+            get { return _SelectedSizes; }
+            set { if (_SelectedSizes != value) { _SelectedSizes = value; NotifyPropertyChanged(); } }
+        }
+
+        private Profile _SelectedProfile;
+        public Profile SelectedProfile
+        {
+            get { return _SelectedProfile; }
+            set { if (_SelectedProfile != value) { _SelectedProfile = value; NotifyPropertyChanged(); } }
+        }
 
         public CreateTaskSpecificationsViewModel()
         {
@@ -32,16 +54,19 @@ namespace Supreme.ViewModel
             Parent = parent;
             Profiles = GetProfiles();
             Sizes = new ObservableCollection<Enums.Size>() { Enums.Size.Small, Enums.Size.Medium, Enums.Size.Large, Enums.Size.XLarge };
+            SelectedMode = "keywords";
+            SelectedSizes = Enums.Size.Medium;
+            SelectedProfile = Profiles.FirstOrDefault();
         }
 
         
 
 
-        public override void NextStep(CreateTaskViewModel CreateTaskVM)
+        public override void NextStep(CreateTaskViewModel createTaskVm)
         {
             Parent.CanCreate = true;
-
-            CreateTaskVM.Current = CreateTaskVM.finalize;
+            Parent.CurrentTask.Size = SelectedSizes.ToString();
+            createTaskVm.Current = createTaskVm.finalize;
 
         }
 
@@ -49,9 +74,9 @@ namespace Supreme.ViewModel
         {
             var profiles = new ObservableCollection<Profile>();
 
-            using (StreamReader r = new StreamReader("profiles.json"))
+            using (var r = new StreamReader("profiles.json"))
             {
-                string json = r.ReadToEnd();
+                var json = r.ReadToEnd();
                 var tasks = JsonConvert.DeserializeObject<ListProfiles>(json);
                 foreach (var task in tasks.Profiles)
                 {
