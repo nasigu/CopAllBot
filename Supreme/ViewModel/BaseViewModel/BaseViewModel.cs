@@ -2,9 +2,6 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Supreme.ViewModel
 {
@@ -30,8 +27,8 @@ namespace Supreme.ViewModel
 
         #region Property
 
-        private string _DisplayName;
-        public string DisplayName { get { return _DisplayName; } protected set { if (_DisplayName != value) { _DisplayName = value; NotifyPropertyChanged(); } } }
+        private string _displayName;
+        public string DisplayName { get { return _displayName; } protected set { if (_displayName != value) { _displayName = value; NotifyPropertyChanged(); } } }
 
         public bool IsDialog { get; private set; }
 
@@ -71,30 +68,37 @@ namespace Supreme.ViewModel
 
         internal virtual string DownloadHtml(string urlAddress)
         {
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            string data = "";
-            if (response.StatusCode == HttpStatusCode.OK)
+            try
             {
-                Stream receiveStream = response.GetResponseStream();
-                StreamReader readStream = null;
-
-                if (response.CharacterSet == null)
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                string data = "";
+                if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    readStream = new StreamReader(receiveStream);
-                }
-                else
-                {
-                    readStream = new StreamReader(receiveStream, System.Text.Encoding.GetEncoding(response.CharacterSet));
-                }
+                    Stream receiveStream = response.GetResponseStream();
+                    StreamReader readStream = null;
 
-                data = readStream.ReadToEnd();
+                    if (response.CharacterSet == null)
+                    {
+                        readStream = new StreamReader(receiveStream);
+                    }
+                    else
+                    {
+                        readStream = new StreamReader(receiveStream, System.Text.Encoding.GetEncoding(response.CharacterSet));
+                    }
 
-                response.Close();
-                readStream.Close();
+                    data = readStream.ReadToEnd();
+
+                    response.Close();
+                    readStream.Close();
+                }
+                return data;
             }
-            return data;
+            catch(Exception e)
+            {
+                return "";
+            }
+           
         }
 
 

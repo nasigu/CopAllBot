@@ -12,10 +12,10 @@
         
         <!--<Setter Property="BorderBrush" Value="#4a4a4a"/>-->
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="BorderBrush" Value="#FF171A2E"/>
+        <Setter Property="BorderBrush" Value="#2A343D"/>
         <Setter Property="FontFamily" Value="Helvetica" />
         <Setter Property="FontSize" Value="12" />
-        <Setter Property="Background" Value="#FF1A1C2B" />
+        <Setter Property="Background" Value="#2A343D" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="Margin" Value="15,0,10,10" />
         <Setter Property="MinWidth" Value="80" />
