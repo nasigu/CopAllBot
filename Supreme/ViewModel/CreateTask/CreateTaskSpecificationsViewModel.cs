@@ -22,21 +22,21 @@ namespace Supreme.ViewModel
         public string SelectedMode
         {
             get { return _SelectedMode; }
-            set { if (_SelectedMode != value) { _SelectedMode = value; NotifyPropertyChanged(); } }
+            set { if (_SelectedMode != value) { _SelectedMode = value; Parent.CurrentTask.Mode = value; NotifyPropertyChanged(); } }
         }
 
         private Enums.Size _SelectedSizes;
         public Enums.Size SelectedSizes
         {
             get { return _SelectedSizes; }
-            set { if (_SelectedSizes != value) { _SelectedSizes = value; NotifyPropertyChanged(); } }
+            set { if (_SelectedSizes != value) { _SelectedSizes = value; Parent.CurrentTask.Size = value.ToString(); NotifyPropertyChanged(); } }
         }
 
         private Profile _SelectedProfile;
         public Profile SelectedProfile
         {
             get { return _SelectedProfile; }
-            set { if (_SelectedProfile != value) { _SelectedProfile = value; NotifyPropertyChanged(); } }
+            set { if (_SelectedProfile != value) { _SelectedProfile = value; Parent.CurrentTask.Profile = value.ProfileName; NotifyPropertyChanged(); } }
         }
 
         public CreateTaskSpecificationsViewModel()
@@ -65,7 +65,9 @@ namespace Supreme.ViewModel
         public override void NextStep(CreateTaskViewModel createTaskVm)
         {
             Parent.CanCreate = true;
-            Parent.CurrentTask.Size = SelectedSizes.ToString();
+            //Parent.CurrentTask.Size = SelectedSizes.ToString();
+            //Parent.CurrentTask.Profile = SelectedProfile.ProfileName;
+            //Parent.CurrentTask.Mode = SelectedMode;
             createTaskVm.Current = createTaskVm.finalize;
 
         }

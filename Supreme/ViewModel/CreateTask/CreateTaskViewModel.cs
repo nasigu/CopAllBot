@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Supreme.Core;
 using Supreme.Model;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.Serialization.Json;
 using System.Windows.Input;
 
 namespace Supreme.ViewModel
@@ -27,11 +27,13 @@ namespace Supreme.ViewModel
         {
             MainViewModel = mainViewModel;
             CanCreate = false;
-            CurrentTask = new TaskDashboard();
+            CurrentTask = new TaskDashboard {Store = "Supreme"};
+            TaskDate = new TaskTime();
+            TaskCount = 1;
             typed = new CreateTaskTypeViewModel(this);
             spec = new CreateTaskSpecificationsViewModel(this);
             finalize = new CreateTaskFinalizeViewModel(this);
-            NotifyPropertyChangedAll();
+            
             Current = typed;
         }
 
@@ -39,7 +41,6 @@ namespace Supreme.ViewModel
 
         #region Property
 
-        public TaskDashboard TestTask = new TaskDashboard();
         //public bool CanCreate { get; set; }
 
         private bool _CanCreate;
@@ -49,7 +50,13 @@ namespace Supreme.ViewModel
             set { if (_CanCreate != value) { _CanCreate = value; NotifyPropertyChanged(); } }
         }
 
+
+
         public TaskDashboard CurrentTask { get; set; }
+
+        public TaskTime TaskDate { get; set; }
+
+        public int TaskCount { get; set; }
 
         public MainViewModel MainViewModel { get; set; }
 
@@ -106,7 +113,6 @@ namespace Supreme.ViewModel
         private void ViewSpecifications()
         {
             Current = spec;
-            //CreateTaskSpecificationsViewModel vm = (CreateTaskSpecificationsViewModel)Current;
         }
 
         private void ViewFinalize()
@@ -121,27 +127,27 @@ namespace Supreme.ViewModel
 
         private void CreateTask()
         {
-           
-            DataContractJsonSerializer jsonFormatter = new DataContractJsonSerializer(typeof(TaskDashboard));
-            //using (FileStream fileStream = new FileStream("tasks.json", FileMode.OpenOrCreate))
-            //{
-            //    jsonFormatter.WriteObject(fileStream, CurrentTask);
-            //}
             ListTaskDashboard tasks;
-            using (StreamReader r = new StreamReader("tasks.json"))
+            CurrentTask.Date = TaskDate.Date.ToString("dd/MM/yyyy") + " " +  TaskDate.Time.ToString("hh:mm:ss");
+            using (var r = new StreamReader("tasks.json"))
             {
-                string json = r.ReadToEnd();
+                var json = r.ReadToEnd();
                 tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json) ?? new ListTaskDashboard();
                 tasks.Tasks =  tasks.Tasks ?? new List<TaskDashboard>();
-                tasks.Tasks.Add(CurrentTask);
-                
+                for (var i = 0; i < TaskCount; i++)
+                {
+                    var task = CurrentTask.ShallowCopy();
+                    task.Id = tasks.Tasks.Count + 1;
+                    tasks.Tasks.Add(task);
+                }
+
             }
 
-            using (StreamWriter file = File.CreateText("tasks.json"))
-                {
-                    JsonSerializer serializer = new JsonSerializer();
-                    serializer.Serialize(file, tasks);
-                }
+            using (var file = File.CreateText("tasks.json"))
+            {
+                var serializer = new JsonSerializer();
+                serializer.Serialize(file, tasks);
+            }
 
             MainViewModel.ViewTask();
 

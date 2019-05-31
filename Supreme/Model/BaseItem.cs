@@ -12,9 +12,6 @@ namespace Supreme.Model
         private long _Id;
         public virtual long Id { get { return _Id; } set { if (_Id != value) { _Id = value; NotifyPropertyChanged(); } } }
 
-        private bool _Aviable;
-        public bool Aviable { get { return _Aviable; } set { if (_Aviable != value) { _Aviable = value; NotifyPropertyChanged(); } } }
-
         public event EventHandler Saved;
         protected void NotifySaved()
         {

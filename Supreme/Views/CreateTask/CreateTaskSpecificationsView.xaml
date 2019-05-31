@@ -28,7 +28,7 @@
                     <Label Grid.Row="0" Content="mode" Style="{StaticResource ProfileSettingsLabelStyle}"/>
                     <ComboBox Grid.Row="1" Template="{StaticResource ComboBoxMainStyle}" ItemsSource="{Binding Path=Mode}" MaxHeight="20" SelectedItem="{Binding SelectedMode}" IsSynchronizedWithCurrentItem="True"  Margin="15,0"/>
                     <Label Content="task count *" Grid.Column="1" Grid.Row="0" Style="{StaticResource ProfileSettingsLabelStyle}" Margin="10,0,10,25" Grid.RowSpan="2"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Text="0" Margin="15" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Parent.TaskCount}" Margin="15" />
                     <Label Grid.Row="0" Grid.Column="2" Content="profile" Style="{StaticResource ProfileSettingsLabelStyle}"/>
                     <ComboBox Grid.Row="1" Grid.Column="2" Template="{StaticResource ComboBoxMainStyle}" MaxHeight="20" ItemsSource="{Binding Path=Profiles}" SelectedItem="{Binding SelectedProfile}" IsSynchronizedWithCurrentItem="True"  DisplayMemberPath="ProfileName" Margin="15,0"/>
                 </Grid>

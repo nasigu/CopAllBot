@@ -14,9 +14,12 @@
         <DataTemplate DataType="{x:Type data:TaskDashboard}">
             <Grid>
                 <StackPanel Orientation="Horizontal" Margin="10">
+                    <Label Content="{Binding Id}"/>
                     <Label Content="{Binding Profile}"/>
                     <Label Content="{Binding Store}"/>
                     <Label Content="{Binding Product}"/>
+                    <Label Content="{Binding Style}"/>
+                    <Label Content="{Binding Date}"/>
                     <Label Content="{Binding Size}"/>
                     <Label Content="{Binding Log}"/>
                     <Label Content="{Binding Action}"/>
@@ -41,6 +44,7 @@
                      ItemsPanel="{StaticResource listPanelTemplate}"
                      Margin="10"
                      BorderThickness="3"
+                     Background="Transparent"
                      >
             </ListBox>
         

@@ -50,6 +50,10 @@ namespace Supreme.Model
         private string _Category;
         public string Category { get { return _Category; } set { if (_Category != value) { _Category = value; NotifyPropertyChanged(); } } }
 
+        [DataMember(Name = "Mode")]
+        private string _Mode;
+        public string Mode { get { return _Mode; } set { if (_Mode != value) { _Mode = value; NotifyPropertyChanged(); } } }
+
         [DataMember(Name = "Date")]
         private string _Date;
         public string Date { get { return _Date; } set { if (_Date != value) { _Date = value; NotifyPropertyChanged(); } } }
@@ -62,5 +66,9 @@ namespace Supreme.Model
         private string _Action;
         public string Action { get { return _Action; } set { if (_Action != value) { _Action = value; NotifyPropertyChanged(); } } }
 
+        public TaskDashboard ShallowCopy()
+        {
+            return (TaskDashboard)this.MemberwiseClone();
+        }
     }
 }
