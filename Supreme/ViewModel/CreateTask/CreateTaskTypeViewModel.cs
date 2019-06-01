@@ -12,7 +12,7 @@ namespace Supreme.ViewModel
 {
     public class CreateTaskTypeViewModel : BaseStepViewModel
     {
-        public TaskDashboard CurrentTask;
+        public Model.Task CurrentTask;
 
         public CreateTaskViewModel Parent { get; set; }
 

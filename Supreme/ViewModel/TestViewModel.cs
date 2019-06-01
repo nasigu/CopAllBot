@@ -13,6 +13,8 @@ using System.Text.RegularExpressions;
 using AngleSharp.Dom;
 using System.Net;
 using System.IO;
+using System.Linq;
+using System.Timers;
 using Newtonsoft.Json;
 using Supreme.Core.KeywordSearchEngine;
 using Supreme.Model.Supreme;
@@ -32,15 +34,23 @@ namespace Supreme.ViewModel
             config = Configuration.Default.WithDefaultLoader();
             context = BrowsingContext.New(config);
             Parser = new HtmlParser();
+            StatusAsync = "Not done";
         }
+
+
 
         #endregion Constructor
 
         #region Property
 
+        private string _StatusAsync;
+        public string StatusAsync { get { return _StatusAsync; } set { if (_StatusAsync != value) { _StatusAsync = value; NotifyPropertyChanged(); } } }
+
         IConfiguration config;
         IBrowsingContext context;
         HtmlParser Parser;
+
+
 
         public ObservableCollection<Test> Test { get; set; }
         public ObservableCollection<string> Output { get; set; }
@@ -92,6 +102,9 @@ namespace Supreme.ViewModel
         private ICommand _MobileStockCommand;
         public ICommand MobileStockCommand { get { return _MobileStockCommand ?? (_MobileStockCommand = new ActCommand(MobileStockTest)); } }
 
+        private ICommand _MobileStockCommandAsync;
+        public ICommand MobileStockCommandAsync { get { return _MobileStockCommandAsync ?? (_MobileStockCommandAsync = new ActCommand(MobileStockTestAsync)); } }
+
 
         #endregion Command
 
@@ -101,8 +114,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Purple",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/shop/304279");
@@ -131,8 +144,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Orange",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/shop/sweatshirts/pma47nqb1/pu4k2tbd6");
@@ -162,8 +175,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Purple",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/shop/cart");
@@ -179,8 +192,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Purple",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/mobile/#checkout");
@@ -198,8 +211,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Purple",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
 
             string Source = DownloadHtml("https://www.supremenewyork.com/checkout");
@@ -269,8 +282,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Purple",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
             // string EncodedResponse = Request.Form["g-Recaptcha-Response"];
 
@@ -338,27 +351,90 @@ namespace Supreme.ViewModel
 
         void MobileStockTest()
         {
-            var i = GetMobileStockRequestAsync();
+            var i = GetMobileStockRequest();
             var dfd = 0;
         }
 
-        MobileStock GetMobileStockRequestAsync()
+        void MobileStockTestAsync()
         {
-            var task = new Model.Task()
+            GetMobileStockRequestAsync();
+            var dfd = 0;
+        }
+
+        private  async Task<string> dDownloadHtmlAsync(string urlAddress)
+        {
+            try
             {
-                Color = "White",
-                ProductSize = Enums.Size.Medium,
-                //ProductName = "Putti Tee",
-                ProductName = "Overdyed Pocket, Tee",
-                ProductCategory = "Tops/Sweaters"
+                var request = WebRequest.Create(urlAddress);
+                var response = await request.GetResponseAsync();
+                string data = "";
 
-            };
+                using (Stream receiveStream = response.GetResponseStream())
+                {
+                    using (StreamReader readStream = new StreamReader(receiveStream))
+                    {
+                        data = await readStream.ReadToEndAsync();
 
+                        response.Close();
+                        readStream.Close();
+                    }
+                }
+
+                return data;
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
+
+        MobileStock  GetMobileStockRequest()
+        {
+
+            var task = Model.Task.GetTaskList()[0];
 
             string MobileStockJsonString = DownloadHtml("https://www.supremenewyork.com/mobile_stock.json");
 
+
             MobileStock data = MobileStock.FromJson(MobileStockJsonString);
             string IdOfProduct = GetIdByTask(data, task);
+
+            
+
+            Product productData;
+
+            if (IdOfProduct != "")
+            {
+                string ProductJson = DownloadHtml($"https://www.supremenewyork.com/shop/{IdOfProduct}.json");
+                productData = Product.FromJson(ProductJson);
+            }
+            else
+            {
+                // TODO: Log system
+                throw new NotImplementedException();
+            }
+
+            var ColorId = "";
+            var SizeId = "";
+            GetColorAndSizeIdByTask(productData, task, out ColorId, out SizeId);
+            var i = 0;
+
+            return data;
+
+        }
+
+        async void GetMobileStockRequestAsync()
+        {
+
+            var task = Model.Task.GetTaskList()[0];
+
+            //string MobileStockJsonString = DownloadHtml("https://www.supremenewyork.com/mobile_stock.json");
+            var MobileStockJsonString = await dDownloadHtmlAsync("https://www.supremenewyork.com/mobile_stock.json");
+
+
+            MobileStock data = MobileStock.FromJson(MobileStockJsonString);
+            string IdOfProduct = GetIdByTask(data, task);
+
 
 
             Product productData;
@@ -374,82 +450,83 @@ namespace Supreme.ViewModel
                 throw new NotImplementedException();
             }
 
-            string ColorId = "";
-            string SizeId = "";
-            GetColorIDByTask(productData, task, out ColorId, out SizeId);
+            var ColorId = "";
+            var SizeId = "";
+            GetColorAndSizeIdByTask(productData, task, out ColorId, out SizeId);
             var i = 0;
 
-            return data;
-
+            
         }
 
-        private void GetColorIDByTask(Product data, Model.Task task, out string ColorId, out string SizeId)
+        private void GetColorAndSizeIdByTask(Product data, Model.Task task, out string ColorId, out string SizeId)
         {
-            IKeyWordEngine searchEngine = new AhoCorasick();
+
+            //IKeyWordEngine searchEngine = new AhoCorasick();
+            var colorKeywords = task.Style.Split(',').ToList();
+            var sizeKeywords = new List<string>() { "+" + task.Size };
+
+            var ahoCorasickColor = AhoCorasick.CreateBuilder().SetWords(colorKeywords).Build();
+            var ahoCorasickSize = AhoCorasick.CreateBuilder().SetWords(sizeKeywords).Build();
             ColorId = "";
             SizeId = "";
             foreach (var item in data.Styles)
             {
-                if (searchEngine.Search(item.Name, new List<string>() { task.Color.Trim().ToLower() }))
+                if (!ahoCorasickColor.Search(ahoCorasickColor, item.Name)) continue;
+                ColorId = item.Id.ToString();
+
+                foreach (var size in item.Sizes)
                 {
-                    ColorId = item.Id.ToString();
-
-
-                    foreach (var size in item.Sizes)
+                    if (ahoCorasickSize.Search(ahoCorasickSize, size.Name.ToString()))
                     {
-                        if (searchEngine.Search(size.Name.ToString(), new List<string>() { task.ProductSize.ToString().Trim().ToLower() }))
-                        {
-                            SizeId = size.Id.ToString();
-                            break;
-                        }
+                        SizeId = size.Id.ToString();
+                        break;
                     }
-                    break;
                 }
+                break;
             }
         }
 
         private string GetSizeIDByTask(Product data, Model.Task task)
         {
-            IKeyWordEngine searchEngine = new AhoCorasick();
+            //IKeyWordEngine searchEngine = new AhoCorasick();
 
-            foreach (var item in data.Styles)
-            {
-                if (searchEngine.Search(item.Name, new List<string>() { task.Color }))
-                {
-                    return item.Id.ToString();
-                }
-            }
+            //foreach (var item in data.Styles)
+            //{
+            //    if (searchEngine.Search(item.Name, new List<string>() { task.Color }))
+            //    {
+            //        return item.Id.ToString();
+            //    }
+            //}
             return "";
         }
 
         private string GetIdByTask(MobileStock data, Model.Task task)
         {
-            IKeyWordEngine searchEngine = new AhoCorasick();
 
-            var keywords = new List<string>();
-            foreach (var item in task.ProductName.Split(','))
-            {
-                keywords.Add(item.Trim().ToLower());
-            }
+            var keywords = task.Product.Split(',').ToList();
 
-            if (data.ProductsAndCategories.ContainsKey(task.ProductCategory))
+            var ahoCorasick = AhoCorasick.CreateBuilder().SetWords(keywords).Build();
+
+            if (data.ProductsAndCategories.ContainsKey(task.Category))
             {
-                foreach (var item in data.ProductsAndCategories[task.ProductCategory])
+                foreach (var item in data.ProductsAndCategories[task.Category])
                 {
-                    if (searchEngine.Search(item.Name, keywords))
+                    if (ahoCorasick.Search(ahoCorasick, item.Name))
                     {
                         return item.Id.ToString();
                     }
                 }
             }
-
-            if (data.ProductsAndCategories.ContainsKey("new"))
+            else
             {
-                foreach (var item in data.ProductsAndCategories["new"])
+                if (data.ProductsAndCategories.ContainsKey("new"))
                 {
-                    if (searchEngine.Search(item.Name, keywords))
+                    foreach (var item in data.ProductsAndCategories["new"])
                     {
-                        return item.Id.ToString();
+                        if (ahoCorasick.Search(ahoCorasick, item.Name))
+                        {
+                            return item.Id.ToString();
+                        }
                     }
                 }
             }
@@ -463,8 +540,8 @@ namespace Supreme.ViewModel
         {
             var task = new Model.Task()
             {
-                Color = "Purple",
-                ProductSize = Enums.Size.Medium
+                Style = "Purple",
+                Size = "Medium"
             };
 
             var cartCookie = GetCartCookie(Document, task);
@@ -562,7 +639,7 @@ namespace Supreme.ViewModel
             var sizes = GetElementsBySelector(document, selector);
             foreach (var size in sizes)
             {
-                if (size.InnerHtml == task.ProductSize.ToString())
+                if (size.InnerHtml == task.Size)
                 {
                     return size.GetAttribute("value");
                 }
@@ -577,7 +654,7 @@ namespace Supreme.ViewModel
             var styles = GetElementsBySelector(document, selector);
             foreach (var style in styles)
             {
-                if (style.InnerHtml.Trim() == task.Color)
+                if (style.InnerHtml.Trim() == task.Style)
                 {
                     var styleInt = GetElementBySelector(document, intSelector);
                     return styleInt.GetAttribute("value");

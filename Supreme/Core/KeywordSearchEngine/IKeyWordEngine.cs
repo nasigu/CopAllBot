@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Supreme.Core.KeywordSearchEngine
 {
-    interface IKeyWordEngine
+    public interface IKeyWordEngine
     {
-        bool Search(string text, List<string> keywords);
+        bool Search(IKeyWordEngine engine, string text);
     }
 }

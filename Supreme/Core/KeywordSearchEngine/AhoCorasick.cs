@@ -20,41 +20,140 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using CsQuery.ExtensionMethods.Internal;
 
 namespace Supreme.Core.KeywordSearchEngine
 {
-    class AhoCorasick : IKeyWordEngine
+    public class AhoCorasick : IKeyWordEngine
     {
-        public bool Search(string text, List<string> keywords)
+        public Trie AddTrie { get; set; }
+        public Trie MinusTrie { get; set; }
+        public List<string> AddWords { get; set; }
+        public List<string> MinusWords { get; set; }
+
+
+        public class AhoCorasickBuilder
         {
-            Trie trie = new Trie();
-            List<string> founded = new List<string>();
-            foreach (var keyword in keywords)
+            private readonly AhoCorasick ahoCorasick;
+
+            public AhoCorasickBuilder()
             {
-                trie.Add(keyword.Trim().ToLower());
-            }
-            trie.Build();
-            foreach (string word in trie.Find(text.Trim().ToLower()))
-            {
-                founded.Add(word.Trim().ToLower());
+                ahoCorasick = new AhoCorasick();
             }
 
-            return UnorderedEqual(keywords, founded);
+            public AhoCorasickBuilder SetWords(List<string> keywords)
+            {
+               ahoCorasick.AddWords =  GetKeywordsListTyped(keywords, true) ?? new List<string>();
+               ahoCorasick.MinusWords = GetKeywordsListTyped(keywords, false) ?? new List<string>();
+               SetTries();
+               return this;
+            }
+
+            private void SetTries()
+            {
+                if (!ahoCorasick.AddWords.IsNullOrEmpty())
+                {
+                   ahoCorasick.AddTrie = AddWordsToTrie(ahoCorasick.AddWords);
+
+                }
+
+                if (!ahoCorasick.MinusWords.IsNullOrEmpty())
+                {
+                    ahoCorasick.MinusTrie = AddWordsToTrie(ahoCorasick.MinusWords);
+
+                }
+            }
+
+            private List<string> GetKeywordsListTyped(List<string> keywords, bool isThisAddWords)
+            {
+                var keywordType = isThisAddWords ? "+" : "-";
+                var keywordList = new List<string>();
+
+                foreach (var keyword in keywords)
+                {
+                    if (keyword.Trim().ToLower().Substring(0, 1) == keywordType)
+                    {
+                        keywordList.Add(keyword.Replace(keywordType, "").Trim().ToLower());
+                    }
+                }
+
+                return keywordList;
+            }
+
+            private Trie AddWordsToTrie(List<string> keywords)
+            {
+                var trie = new Trie();
+                foreach (var keyword in keywords)
+                {
+                    trie.Add(keyword);
+                }
+                return trie;
+            }
+
+            public AhoCorasick Build()
+            {
+                ahoCorasick.AddTrie?.Build();
+                ahoCorasick.MinusTrie?.Build();
+                return ahoCorasick;
+            }
+
         }
 
-        bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
+        public static AhoCorasickBuilder CreateBuilder()
         {
-            // 1
-            // Require that the counts are equal
+            return new AhoCorasickBuilder();
+        }
+
+        public bool Search(IKeyWordEngine engine, string text)
+        {
+
+            text = text.Trim().ToLower();
+
+            List<string> founded = new List<string>();
+
+            AhoCorasick Engine = (AhoCorasick)engine;
+            if (Engine.AddTrie == null)
+            {
+                return false;
+            }
+
+            foreach (var word in Engine.AddTrie.Find(text))
+            {
+                founded.Add(word);
+            }
+
+
+            if (UnorderedEqual(founded, Engine.AddWords))
+            {
+                if (Engine.MinusTrie == null)
+                {
+                    return true;
+                }
+                foreach (var word in Engine.MinusTrie.Find(text))
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        
+
+        private bool UnorderedEqual<T>(ICollection<T> a, ICollection<T> b)
+        {
+
             if (a.Count != b.Count)
             {
                 return false;
             }
-            // 2
-            // Initialize new Dictionary of the type
+
             Dictionary<T, int> d = new Dictionary<T, int>();
-            // 3
-            // Add each key's frequency from collection A to the Dictionary
             foreach (T item in a)
             {
                 int c;
@@ -67,9 +166,7 @@ namespace Supreme.Core.KeywordSearchEngine
                     d.Add(item, 1);
                 }
             }
-            // 4
-            // Add each key's frequency from collection B to the Dictionary
-            // Return early if we detect a mismatch
+
             foreach (T item in b)
             {
                 int c;
@@ -86,21 +183,18 @@ namespace Supreme.Core.KeywordSearchEngine
                 }
                 else
                 {
-                    // Not in dictionary
                     return false;
                 }
             }
-            // 5
-            // Verify that all frequencies are zero
-            foreach (int v in d.Values)
+
+            foreach (var v in d.Values)
             {
                 if (v != 0)
                 {
                     return false;
                 }
             }
-            // 6
-            // We know the collections are equal
+
             return true;
         }
     }

@@ -2,6 +2,7 @@
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace Supreme.ViewModel
 {
@@ -75,6 +76,7 @@ namespace Supreme.ViewModel
                 string data = "";
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
+                    
                     Stream receiveStream = response.GetResponseStream();
                     StreamReader readStream = null;
 
@@ -94,13 +96,39 @@ namespace Supreme.ViewModel
                 }
                 return data;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return "";
             }
-           
+
         }
 
+        internal virtual async Task<string> DownloadHtmlAsync(string urlAddress)
+        {
+            try
+            {
+                var request = WebRequest.Create(urlAddress);
+                var response = await request.GetResponseAsync();
+                string data = "";
+
+                using (Stream receiveStream = response.GetResponseStream())
+                {
+                    using (StreamReader readStream = new StreamReader(receiveStream))
+                    {
+                        data = await readStream.ReadToEndAsync();
+
+                        response.Close();
+                        readStream.Close();
+                    }
+                }
+                
+                return data;
+            }
+            catch (Exception e)
+            {
+                return "";
+            }
+        }
 
 
         public virtual void Dispose()

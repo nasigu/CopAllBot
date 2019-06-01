@@ -16,7 +16,7 @@ namespace Supreme.ViewModel
         public CreateTaskViewModel()
         {
             CanCreate = false;
-            CurrentTask = new TaskDashboard();
+            CurrentTask = new Task();
             typed = new CreateTaskTypeViewModel(this);
             spec = new CreateTaskSpecificationsViewModel(this);
             finalize = new CreateTaskFinalizeViewModel(this);
@@ -27,7 +27,7 @@ namespace Supreme.ViewModel
         {
             MainViewModel = mainViewModel;
             CanCreate = false;
-            CurrentTask = new TaskDashboard {Store = "Supreme"};
+            CurrentTask = new Task {Store = "Supreme"};
             TaskDate = new TaskTime();
             TaskCount = 1;
             typed = new CreateTaskTypeViewModel(this);
@@ -52,7 +52,7 @@ namespace Supreme.ViewModel
 
 
 
-        public TaskDashboard CurrentTask { get; set; }
+        public Task CurrentTask { get; set; }
 
         public TaskTime TaskDate { get; set; }
 
@@ -127,13 +127,13 @@ namespace Supreme.ViewModel
 
         private void CreateTask()
         {
-            ListTaskDashboard tasks;
+            ListTask tasks;
             CurrentTask.Date = TaskDate.Date.ToString("dd/MM/yyyy") + " " +  TaskDate.Time.ToString("hh:mm:ss");
             using (var r = new StreamReader("tasks.json"))
             {
                 var json = r.ReadToEnd();
-                tasks = JsonConvert.DeserializeObject<ListTaskDashboard>(json) ?? new ListTaskDashboard();
-                tasks.Tasks =  tasks.Tasks ?? new List<TaskDashboard>();
+                tasks = JsonConvert.DeserializeObject<ListTask>(json) ?? new ListTask();
+                tasks.Tasks =  tasks.Tasks ?? new List<Task>();
                 for (var i = 0; i < TaskCount; i++)
                 {
                     var task = CurrentTask.ShallowCopy();

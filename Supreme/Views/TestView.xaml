@@ -24,7 +24,10 @@
             <Button Content="Mobile Testing" Command="{Binding MobileTestingCommand}"/>
             <Button Content="Desktop Testing" Command="{Binding DesktopTestingCommand}"/>
             <Button Content="Mobile Stock" Command="{Binding MobileStockCommand}"/>
+            <Button Content="Mobile Stock Async" Command="{Binding MobileStockCommandAsync}"/>
             <Button Content="checkout"/>
         </StackPanel>
+
+        <Label Grid.Row="1" Content="{Binding StatusAsync}"/>
     </Grid>
 </UserControl>

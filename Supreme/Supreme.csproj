@@ -97,6 +97,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CopHandler\BaseCop.cs" />
+    <Compile Include="CopHandler\SupremeCop.cs" />
     <Compile Include="Core\ActCommand.cs" />
     <Compile Include="Core\Converters\BaseConverter.cs" />
     <Compile Include="Core\Converters\BoolToVisibilityConverter.cs" />
@@ -117,7 +119,7 @@
     <Compile Include="Model\Mode.cs" />
     <Compile Include="Model\Supreme\Country.cs" />
     <Compile Include="Model\Supreme\CountryList.cs" />
-    <Compile Include="Model\ListTaskDashboard.cs" />
+    <Compile Include="Model\ListTask.cs" />
     <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\Supreme\MobileStock.cs" />
     <Compile Include="Model\Supreme\Product.cs" />
@@ -129,8 +131,8 @@
     <Compile Include="Model\Supreme\ProductDescription.cs" />
     <Compile Include="Model\Supreme\ProductSize.cs" />
     <Compile Include="Model\Supreme\Profile\CardTypeList.cs" />
+    <Compile Include="Model\TaskTest.cs" />
     <Compile Include="Model\Task.cs" />
-    <Compile Include="Model\TaskDashboard.cs" />
     <Compile Include="Model\TaskTime.cs" />
     <Compile Include="Model\Test.cs" />
     <Compile Include="ViewModel\BaseViewModel\BaseStepViewModel.cs" />

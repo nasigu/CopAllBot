@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Supreme.Model
 {
-    public class ListTaskDashboard
+    public class ListTask
     {
-        public List<TaskDashboard> Tasks { get; set; }
+        public List<Task> Tasks { get; set; }
     }
 }

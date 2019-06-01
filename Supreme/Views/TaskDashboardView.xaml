@@ -11,7 +11,7 @@
       d:DesignHeight="450" d:DesignWidth="800">
     
     <UserControl.Resources>
-        <DataTemplate DataType="{x:Type data:TaskDashboard}">
+        <DataTemplate DataType="{x:Type data:Task}">
             <Grid>
                 <StackPanel Orientation="Horizontal" Margin="10">
                     <Label Content="{Binding Id}"/>
