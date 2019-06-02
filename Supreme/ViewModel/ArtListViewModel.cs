@@ -69,7 +69,6 @@ namespace Supreme.ViewModel
 
         private void DoSomething()
         {
-            Trace.WriteLine("FSDFS");
         }
 
         #endregion Method
